@@ -7,7 +7,11 @@
         mc:Ignorable="d"
         Title="CarView" Height="450" Width="800">
     <Grid>
-        <StackPanel>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="0*"/>
+            <ColumnDefinition/>
+        </Grid.ColumnDefinitions>
+        <StackPanel Grid.ColumnSpan="2" Margin="0,0,-0.4,0">
             <Label Content="Válassza ki a regisztrálandó gépjármű tulajdonosát"></Label>
             <ComboBox ItemsSource="{Binding Clients.FirstName}" SelectedItem="{Binding SelectedClient}"/>
             <Label Content="Rendszám"></Label>

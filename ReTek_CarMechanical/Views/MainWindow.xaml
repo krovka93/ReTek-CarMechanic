@@ -9,8 +9,8 @@
     <Grid>
         <StackPanel>
             <Button Content="Ügyfelek" Command="{Binding ClientCommandHandler}"></Button>
-            <Button Content="Gépjárművek"></Button>
-            <Button Content="Szolgáltatások"></Button>
+            <Button Content="Gépjárművek" Command="{Binding CarCommandHandler}"></Button>
+            <Button Content="Szolgáltatások" Command="{Binding ServiceCommandHandler}"></Button>
             <Button Content="Alkatrészek"></Button>
             <Button Content="Munkalap"></Button>
             <DataGrid Margin="10" Name="lvUsers" ItemsSource="{Binding Clients}" AutoGenerateColumns="True" >
