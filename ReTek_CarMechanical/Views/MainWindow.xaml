@@ -8,7 +8,15 @@
         Title="MainWindow" Height="450" Width="800">
     <Grid>
         <StackPanel>
-            <Label Content="{Binding Test}"></Label>
+            <Button Content="Ügyfelek" Command="{Binding ClientCommandHandler}"></Button>
+            <Button Content="Gépjárművek"></Button>
+            <Button Content="Szolgáltatások"></Button>
+            <Button Content="Alkatrészek"></Button>
+            <Button Content="Munkalap"></Button>
+            <DataGrid Margin="10" Name="lvUsers" ItemsSource="{Binding Clients}" AutoGenerateColumns="True" >
+                
+            </DataGrid>
+
         </StackPanel>
     </Grid>
 </Window>

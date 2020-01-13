@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace ReTek_CarMechanical.Helpers
 {
-    class BussinessLayer:ICar, IClient, IPart, IService, IWorksheet
+    class BussinessLayer : ICar, IClient, IPart, IService, IWorksheet
     {
 
         private static BussinessLayer instance = null;
