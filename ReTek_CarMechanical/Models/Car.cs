@@ -10,7 +10,7 @@ namespace ReTek_CarMechanical.Models
     {
         public int CarID { get; set; }
         public string CarPlateNumber { get; set; }
-        public int CarType { get; set; }
+        public string CarType { get; set; }
         public DateTime CarDateofProduce { get; set; }
         public int CarVIN { get; set; }
     }

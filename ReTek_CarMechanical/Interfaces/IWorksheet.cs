@@ -1,18 +1,18 @@
-﻿using Project_Retek_Store_Manager.Models;
+﻿using ReTek_CarMechanical.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Project_Retek_Store_Manager.Interface
+namespace ReTek_CarMechanical.Interfaces
 {
     interface IWorksheet
     {
         bool UploadWorksheet(Worksheet worksheet);
 
-        bool GetSingleWorksheet(Worksheet worksheet);
+        Worksheet GetSingleWorksheet(Worksheet worksheet);
 
-        bool GetAllWorksheet();
+        List<Worksheet> GetAllWorksheet();
     }
 }

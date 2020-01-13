@@ -1,17 +1,17 @@
-﻿using Project_Retek_Store_Manager.Models;
+﻿using ReTek_CarMechanical.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Project_Retek_Store_Manager.Interface
+namespace ReTek_CarMechanical.Interfaces
 {
     interface IPart
     {
-        bool GetSinglePart(Part part);
+        Part GetSinglePart(Part part);
 
-        bool GetAllPart();
+        List<Part> GetAllPart();
 
         bool AddPart(Part part);
 

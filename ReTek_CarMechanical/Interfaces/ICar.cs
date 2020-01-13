@@ -11,7 +11,7 @@ namespace ReTek_CarMechanical.Interfaces
     {
         bool UploadNewCar(Car newCar);
         bool UpdateExistingCar(Car existingCar);
-        bool GetSingleCar(Car oneCar);
-        bool GetAllCar();
+        Car GetSingleCar(Car oneCar);
+        List<Car> GetAllCar();
     }
 }

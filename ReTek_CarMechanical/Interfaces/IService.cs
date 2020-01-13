@@ -11,7 +11,7 @@ namespace ReTek_CarMechanical.Interfaces
     {
         bool UpdateService(Service service);
         bool AddNewService(Service service);
-        bool GetSingleService(Service service);
-        bool GetAllService();
+        Service GetSingleService(Service service);
+        List<Service> GetAllService();
     }
 }
