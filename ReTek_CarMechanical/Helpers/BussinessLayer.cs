@@ -3,6 +3,7 @@ using ReTek_CarMechanical.Interfaces;
 using ReTek_CarMechanical.Models;
 using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Windows;
 
 namespace ReTek_CarMechanical.Helpers
@@ -12,10 +13,12 @@ namespace ReTek_CarMechanical.Helpers
         #region Private fields and Constructors
         private static BussinessLayer instance = null;
         private static readonly object padlock = new object();
+        private static readonly string oracleDbConnectionString = "Data Source=193.225.33.71;User Id=zzhkiy;Password=szelektcsillag;";
         private static OracleConnection oracleConnection;
 
         BussinessLayer()
         {
+            InitializeDataBaseConnection();
         }
 
         #endregion
@@ -139,19 +142,20 @@ namespace ReTek_CarMechanical.Helpers
         #endregion
 
         #region Private methods
-        private bool OpenDatabaseConnection()
+        private void InitializeDataBaseConnection()
         {
             try
             {
-                string oradb = "Data Source=193.225.33.71;User Id=zzhkiy;Password=szelekcsillag;";
-                oracleConnection = new OracleConnection(oradb);
+                oracleConnection = new OracleConnection(oracleDbConnectionString);
                 oracleConnection.Open();
-                return true;
+                if (oracleConnection.State == ConnectionState.Open)
+                {
+                    oracleConnection.Close();
+                }
             }
             catch (Exception e)
             {
                 MessageBox.Show(e.Message);
-                return false;
             }
         }
         #endregion
