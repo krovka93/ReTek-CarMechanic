@@ -1,23 +1,29 @@
-﻿using ReTek_CarMechanical.Interfaces;
+﻿using Oracle.ManagedDataAccess.Client;
+using ReTek_CarMechanical.Interfaces;
 using ReTek_CarMechanical.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
 
 namespace ReTek_CarMechanical.Helpers
 {
     class BussinessLayer : ICar, IClient, IPart, IService, IWorksheet
     {
-
+        #region Private fields and Constructors
         private static BussinessLayer instance = null;
         private static readonly object padlock = new object();
+        private static OracleConnection oracleConnection;
 
         BussinessLayer()
         {
         }
 
+        #endregion
+
+        #region Interface implementations
         public static BussinessLayer Instance
         {
             get
@@ -132,6 +138,26 @@ namespace ReTek_CarMechanical.Helpers
         {
             throw new NotImplementedException();
         }
+
+        #endregion
+
+        #region Private methods
+        private bool OpenDatabaseConnection()
+        {
+            try
+            {
+                string oradb = "Data Source=193.225.33.71;User Id=zzhkiy;Password=szelekcsillag;";
+                oracleConnection = new OracleConnection(oradb);
+                oracleConnection.Open();
+                return true;
+            }
+            catch (Exception e)
+            {
+                MessageBox.Show(e.Message);
+                return false;
+            }
+        }
+        #endregion
     }
 }
 
