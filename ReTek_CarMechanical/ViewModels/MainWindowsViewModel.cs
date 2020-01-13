@@ -1,11 +1,7 @@
 ﻿using ReTek_CarMechanical.Helpers;
 using ReTek_CarMechanical.Models;
 using ReTek_CarMechanical.Views;
-using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Input;
 
 namespace ReTek_CarMechanical.ViewModels

@@ -3,9 +3,6 @@ using ReTek_CarMechanical.Interfaces;
 using ReTek_CarMechanical.Models;
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 
 namespace ReTek_CarMechanical.Helpers
