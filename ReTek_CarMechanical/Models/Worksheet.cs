@@ -1,19 +1,18 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace ReTek_CarMechanical.Models
 {
     class Worksheet
     {
-        public int Id { get; set; }
-        public DateTime Start { get; set; }
-        public DateTime End { get; set; }
+        public int WorksheetID { get; set; }
+        public DateTime WorkStart { get; set; }
+        public DateTime WorkActualEnd { get; set; }
         public DateTime ExpectedEnd { get; set; }
         public int KilometerState { get; set; }
         public string UniqueId { get; set; }
+        public int CarID { get; set; }
+        public int ServiceID { get; set; }
+        public int PartID { get; set; }
 
     }
 }
