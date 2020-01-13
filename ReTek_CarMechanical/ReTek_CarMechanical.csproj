@@ -64,7 +64,11 @@
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="Helpers\BussinessLayer.cs" />
+    <Compile Include="Interfaces\IClient.cs" />
+    <Compile Include="Interfaces\IPart.cs" />
     <Compile Include="Interfaces\IWorksheet.cs" />
+    <Compile Include="Models\Client.cs" />
+    <Compile Include="Models\Part.cs" />
     <Compile Include="Models\Worksheet.cs" />
     <Compile Include="ViewModels\MainWindowsViewModel.cs" />
     <Compile Include="Views\MainWindow.xaml.cs">
