@@ -14,6 +14,9 @@ namespace ReTek_CarMechanical.Models
         public DateTime ExpectedEnd { get; set; }
         public int KilometerState { get; set; }
         public string UniqueId { get; set; }
+        public int CarID { get; set; }
+        public int ServiceID { get; set; }
+        public int PartID { get; set; }
 
     }
 }
