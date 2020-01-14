@@ -178,7 +178,37 @@ namespace ReTek_CarMechanical.Helpers
 
         public List<Service> GetAllService()
         {
-            throw new NotImplementedException();
+            List<Service> allServices = new List<Service>();
+            oracleConnection = new OracleConnection(oracleDbConnectionString);
+            try
+            {
+                oracleConnection.Open();
+                var commandText = "SELECT * FROM Services";
+                using (OracleCommand command = new OracleCommand(commandText, oracleConnection))
+                {
+                    OracleDataReader dr = command.ExecuteReader();
+                    while (dr.Read())
+                    {
+                        Service oneService = new Service()
+                        {
+                            ServiceID = dr.GetInt32(0),
+                            ServiceName = dr.GetString(1),
+                            ServicePrice = dr.GetInt32(2)
+                        };
+                        allServices.Add(oneService);
+                    }
+
+                }
+            }
+            catch (Exception e)
+            {
+                throw e;
+            }
+            finally
+            {
+                oracleConnection.Close();
+            }
+            return allServices;
         }
 
         public bool UploadWorksheet(Worksheet worksheet)
