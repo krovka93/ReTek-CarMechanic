@@ -11,6 +11,7 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using ReTek_CarMechanical.ViewModels;
 
 namespace ReTek_CarMechanical.Views
 {
@@ -22,6 +23,7 @@ namespace ReTek_CarMechanical.Views
         public ServiceView()
         {
             InitializeComponent();
+            DataContext = new ServiceViewModel();
         }
     }
 }

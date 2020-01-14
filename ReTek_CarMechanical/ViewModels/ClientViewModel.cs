@@ -27,7 +27,7 @@ namespace ReTek_CarMechanical.ViewModels
 
         public void ClientCommandHandlerAction()
         {
-            var result = BussinessLayer.Instance.AddClient(new Client() { 
+           var result = BussinessLayer.Instance.AddClient(new Client() { 
                 BirthDate = BirthDate, 
                 BirthPlace=BirthPlace, 
                 FirstName= FirstName,
@@ -35,15 +35,7 @@ namespace ReTek_CarMechanical.ViewModels
                 SocialSecNum = SocialSecNum,
                 TaxNum = TaxNum });
 
-            if (result)
-            {
-                MessageBox.Show("Sikeres hozzáadás", "Ügyfél hozzáadása");
-            }
-            else
-            {
-                MessageBox.Show("SIKERTELEN hozzáadás", "Ügyfél hozzáadása");
-            }
-
+           MessageBox.Show(result ? "Sikeres hozzáadás" : "SIKERTELEN hozzáadás", "Ügyfél hozzáadása");
         }
 
     }

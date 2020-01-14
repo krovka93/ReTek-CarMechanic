@@ -10,40 +10,31 @@ using System.Windows.Input;
 
 namespace ReTek_CarMechanical.ViewModels
 {
-    class ServiceViewModel
-    {
-        public int ServiceID { get; set; }
-        public string ServiceName { get; set; }
-        public int ServicePrice { get; set; }
+   class ServiceViewModel
+   {
+      public string ServiceName { get; set; }
+      public int ServicePrice { get; set; }
 
-        private ICommand _addNewServiceCommandHandler;
-            public ICommand AddNewServiceCommandHandler
-            {
-                get
-                {
-                    return _addNewServiceCommandHandler ?? (_addNewServiceCommandHandler = new CommandHandler(() => AddNewServiceCommandAction(), () => true));
-                }
-            }
+      private ICommand _addNewServiceCommandHandler;
+      public ICommand AddNewServiceCommandHandler
+      {
+         get
+         {
+            return _addNewServiceCommandHandler ?? (_addNewServiceCommandHandler = new CommandHandler(() => AddNewServiceCommandAction(), () => true));
+         }
+      }
 
-            private void AddNewServiceCommandAction()
-            {
-                var result = BussinessLayer.Instance.UpdateService(new Service()
-                {
-                    ServiceName = ServiceName,
-                    ServicePrice = ServicePrice,
-                    
-                });
+      private void AddNewServiceCommandAction()
+      {
+         var result = BussinessLayer.Instance.UpdateService(new Service()
+         {
+            ServiceName = ServiceName,
+            ServicePrice = ServicePrice,
+
+         });
 
 
-                if (result)
-                {
-                    MessageBox.Show("Sikeres hozzáadás", "Szolgáltatás hozzáadása");
-                }
-                else
-                {
-                    MessageBox.Show("SIKERTELEN hozzáadás", "Szolgáltatás hozzáadása");
-                }
-
-            }
-        }
+         MessageBox.Show(result ? "Sikeres hozzáadás" : "SIKERTELEN hozzáadás", "Szolgáltatás hozzáadása");
+      }
+   }
 }

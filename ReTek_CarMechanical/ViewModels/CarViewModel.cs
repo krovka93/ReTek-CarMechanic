@@ -29,7 +29,7 @@ namespace ReTek_CarMechanical.ViewModels
 
         private void AddNewCarCommandAction()
         {
-            var result = BussinessLayer.Instance.UploadNewCar(new Car()
+           var result = BussinessLayer.Instance.UploadNewCar(new Car()
             {
                 CarOwner = SelectedClient,
                 CarDateofProduce = CarDateofProduce,
@@ -39,15 +39,7 @@ namespace ReTek_CarMechanical.ViewModels
             });
 
 
-            if (result)
-            {
-                MessageBox.Show("Sikeres hozzáadás", "Gépjármű hozzáadása");
-            }
-            else
-            {
-                MessageBox.Show("SIKERTELEN hozzáadás", "Gépjármű hozzáadása");
-            }
-
+           MessageBox.Show(result ? "Sikeres hozzáadás" : "SIKERTELEN hozzáadás", "Gépjármű hozzáadása");
         }
     }
 }

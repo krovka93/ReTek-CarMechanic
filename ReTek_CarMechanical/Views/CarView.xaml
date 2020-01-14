@@ -22,7 +22,7 @@
             <DatePicker SelectedDate="{Binding CarDateofProduce}" ></DatePicker>
             <Label Content="Gépjármű alvázszáma"></Label>
             <TextBox Text="{Binding CarVIN}"></TextBox>
-            <Button Content="Gépjármű regisztrálása az ügyfélhez" Command="{Binding AddNewCarCommand}"></Button>
+         <Button Content="Gépjármű regisztrálása az ügyfélhez" Command="{Binding AddNewCarCommandHandler}"></Button>
         </StackPanel>
     </Grid>
 </Window>
