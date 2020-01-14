@@ -80,26 +80,25 @@ namespace ReTek_CarMechanical.Helpers
                 using (OracleCommand command = new OracleCommand(commandText, oracleConnection))
                 {
                     OracleDataReader dr = command.ExecuteReader();
-                    dr.Read();
-                    foreach (var item in dr)
+                    while (dr.Read())
                     {
                         Client oneClient = new Client()
                         {
-                            ClientID = int.Parse(dr.GetString(0)),
+                            ClientID = dr.GetInt32(0),
                             FirstName = dr.GetString(1),
                             LastName = dr.GetString(2),
-                            BirthDate = DateTime.Parse(dr.GetString(3)),
+                            BirthDate = dr.GetDateTime(3),
                             BirthPlace = dr.GetString(4),
-                            SocialSecNum = int.Parse(dr.GetString(5)),
-                            TaxNum = int.Parse(dr.GetString(6)),
-                            DateRegistered = DateTime.Parse(dr.GetString(7))
+                            SocialSecNum = dr.GetString(5),
+                            TaxNum = dr.GetString(6),
+                            DateRegistered = dr.GetDateTime(7)
                         };
                         allClients.Add(oneClient);
                     }
                 }
             }
             catch (Exception e)
-            { 
+            {
                 throw e;
             }
             return allClients;
@@ -131,18 +130,18 @@ namespace ReTek_CarMechanical.Helpers
                 using (OracleCommand command = new OracleCommand(commandText, oracleConnection))
                 {
                     OracleDataReader dr = command.ExecuteReader();
-                    dr.Read();
-                    foreach (var item in dr)
+                    while (dr.Read())
                     {
                         Part onePart = new Part()
                         {
-                            PartID = int.Parse(dr.GetString(0)),
-                            PartName = dr.GetString(1),
-                            Price = int.Parse(dr.GetString(2)),
-                            Quantity = int.Parse(dr.GetString(3))
+                            PartID = dr.GetInt32(0),
+                            PartName = dr. GetString(1),
+                            Price = dr.GetInt32(2),
+                            Quantity = dr.GetInt32(3)
                         };
                         allParts.Add(onePart);
                     }
+                    
                 }
             }
             catch (Exception e)
