@@ -57,7 +57,10 @@ namespace ReTek_CarMechanical.Helpers
                 cmd.Connection = oracleConnection;
                 rowsUpdated = cmd.ExecuteNonQuery();
             }
-            catch (Exception) { }
+            catch (Exception e)
+            {
+                throw e;
+            }
             finally
             {
                 oracleConnection.Close();
