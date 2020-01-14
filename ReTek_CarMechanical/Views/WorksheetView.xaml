@@ -1,0 +1,29 @@
+﻿<Window x:Class="ReTek_CarMechanical.Views.WorksheetView"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:ReTek_CarMechanical.Views"
+        mc:Ignorable="d"
+        Title="WorksheetView" Height="450" Width="800">
+    <Grid>
+        <StackPanel>
+            <Label Content="Válassza ki a gépjármű tulajdonosát"></Label>
+            <ComboBox ItemsSource="{Binding Clients.FirstName}" SelectedItem="{Binding SelectedClient, UpdateSourceTrigger=PropertyChanged}"/>
+
+            <Label Content="Válassza ki a gépjárművet"></Label>
+            <ComboBox ItemsSource="{Binding Clients.FirstName}" SelectedItem="{Binding SelectedClient, UpdateSourceTrigger=PropertyChanged}"/>
+
+
+            <Label Content="Munka kezdetének ideje"/>
+            <DatePicker SelectedDate="{Binding BirthDate, UpdateSourceTrigger=PropertyChanged}" ></DatePicker>
+            <Label Content="Munka várható befejezésének ideje"/>
+            <DatePicker SelectedDate="{Binding BirthDate, UpdateSourceTrigger=PropertyChanged}" ></DatePicker>
+            <Label Content="Munka befejezésének ideje"/>
+            <DatePicker SelectedDate="{Binding BirthDate, UpdateSourceTrigger=PropertyChanged}" ></DatePicker>
+            <Label Content="Gépjármű aktuális KM óra állása"/>
+            <TextBox Text="{Binding LastName}"></TextBox>
+
+        </StackPanel>
+    </Grid>
+</Window>

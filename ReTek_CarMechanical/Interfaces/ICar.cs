@@ -9,5 +9,7 @@ namespace ReTek_CarMechanical.Interfaces
         bool UpdateExistingCar(Car existingCar);
         Car GetSingleCar(Car oneCar);
         List<Car> GetAllCar();
+        List<Car> GetAllCarByUser(Client selectedClient);
+
     }
 }
