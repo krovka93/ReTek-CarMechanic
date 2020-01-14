@@ -380,14 +380,11 @@ namespace ReTek_CarMechanical.Helpers
             }
             return allWorksheets;
         }
+
         public List<Car> GetAllCarByUser(Client selectedClient)
         {
             throw new NotImplementedException();
         }
-
-        #endregion
-
-        #region Private methods
 
         #endregion
     }
