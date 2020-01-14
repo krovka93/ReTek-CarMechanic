@@ -11,9 +11,9 @@ using System.Windows.Input;
 
 namespace ReTek_CarMechanical.ViewModels
 {
-   class ServiceViewModel : INotifyPropertyChanged
+    class ServiceViewModel : INotifyPropertyChanged
     {
-      
+
         private string _serviceName;
 
         public string ServiceName
@@ -22,7 +22,7 @@ namespace ReTek_CarMechanical.ViewModels
             set { _serviceName = value; OnPropertyChanged("ServiceName"); }
         }
 
-        
+
         private int _servicePrice;
 
         public int ServicePrice
@@ -37,25 +37,25 @@ namespace ReTek_CarMechanical.ViewModels
         public event PropertyChangedEventHandler PropertyChanged;
 
         public ICommand AddNewServiceCommandHandler
-      {
-         get
-         {
-            return _addNewServiceCommandHandler ?? (_addNewServiceCommandHandler = new CommandHandler(() => AddNewServiceCommandAction(), () => true));
-         }
-      }
+        {
+            get
+            {
+                return _addNewServiceCommandHandler ?? (_addNewServiceCommandHandler = new CommandHandler(() => AddNewServiceCommandAction(), () => true));
+            }
+        }
 
-      private void AddNewServiceCommandAction()
-      {
-         var result = BussinessLayer.Instance.UpdateService(new Service()
-         {
-            ServiceName = ServiceName,
-            ServicePrice = ServicePrice,
+        private void AddNewServiceCommandAction()
+        {
+            var result = BussinessLayer.Instance.AddNewService(new Service()
+            {
+                ServiceName = ServiceName,
+                ServicePrice = ServicePrice,
 
-         });
+            });
 
 
-         MessageBox.Show(result ? "Sikeres hozzáadás" : "SIKERTELEN hozzáadás", "Szolgáltatás hozzáadása");
-      }
+            MessageBox.Show(result ? "Sikeres hozzáadás" : "SIKERTELEN hozzáadás", "Szolgáltatás hozzáadása");
+        }
         protected void OnPropertyChanged(string name)
         {
             PropertyChangedEventHandler handler = PropertyChanged;

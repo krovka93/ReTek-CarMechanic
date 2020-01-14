@@ -11,18 +11,31 @@
             <ColumnDefinition Width="0*"/>
             <ColumnDefinition/>
         </Grid.ColumnDefinitions>
-        <StackPanel Grid.ColumnSpan="2" Margin="0,0,-0.4,0">
+        <StackPanel Grid.ColumnSpan="2" Margin="5">
             <Label Content="Válassza ki a regisztrálandó gépjármű tulajdonosát"></Label>
-            <ComboBox ItemsSource="{Binding Clients.FirstName}" SelectedItem="{Binding SelectedClient, UpdateSourceTrigger=PropertyChanged}"/>
+            <ComboBox  Margin="5" ItemsSource="{Binding Clients}" SelectedItem="{Binding SelectedClient, UpdateSourceTrigger=PropertyChanged}">
+                <ComboBox.ItemTemplate>
+                    <DataTemplate>
+                        <TextBlock>
+                            <TextBlock.Text>
+                                <MultiBinding StringFormat="{}{0} {1}">
+                                    <Binding Path="LastName" />
+                                    <Binding Path="FirstName" />
+                                </MultiBinding>
+                            </TextBlock.Text>
+                        </TextBlock>
+                    </DataTemplate>
+                </ComboBox.ItemTemplate>
+            </ComboBox>
             <Label Content="Rendszám"></Label>
-            <TextBox Text="{Binding CarPlateNumber, UpdateSourceTrigger=PropertyChanged}"></TextBox>
+            <TextBox  Margin="5" HorizontalAlignment="Stretch" Text="{Binding CarPlateNumber, UpdateSourceTrigger=PropertyChanged}"></TextBox>
             <Label Content="Gépjármű típusa"></Label>
-            <TextBox Text="{Binding CarType, UpdateSourceTrigger=PropertyChanged}"></TextBox>
+            <TextBox  Margin="5" HorizontalAlignment="Stretch" Text="{Binding CarType, UpdateSourceTrigger=PropertyChanged}"></TextBox>
             <Label Content="Gyártási dátum"></Label>
-            <DatePicker SelectedDate="{Binding CarDateofProduce, UpdateSourceTrigger=PropertyChanged}" ></DatePicker>
+            <DatePicker  Margin="5" HorizontalAlignment="Stretch" SelectedDate="{Binding CarDateofProduce, UpdateSourceTrigger=PropertyChanged}" ></DatePicker>
             <Label Content="Gépjármű alvázszáma"></Label>
-            <TextBox Text="{Binding CarVIN, UpdateSourceTrigger=PropertyChanged}"></TextBox>
-         <Button Content="Gépjármű regisztrálása az ügyfélhez" Command="{Binding AddNewCarCommandHandler}"></Button>
+            <TextBox  Margin="5" HorizontalAlignment="Stretch" Text="{Binding CarVIN, UpdateSourceTrigger=PropertyChanged}"></TextBox>
+            <Button  Margin="5" Height="30" Content="Gépjármű regisztrálása az ügyfélhez" Command="{Binding AddNewCarCommandHandler}"></Button>
         </StackPanel>
     </Grid>
 </Window>

@@ -33,15 +33,25 @@
             <Button Grid.Row="0" Grid.Column="3" Margin="5" Content="Alkatrészek" Command="{Binding PartCommandHandler}"></Button>
             <Button Grid.Row="0" Grid.Column="4" Margin="5" Content="Munkalap"></Button>
         </Grid>
-        <DataGrid  Grid.Row="1" Margin="5" Name="lvUsers" ItemsSource="{Binding Clients}" AutoGenerateColumns="True">
+        <DataGrid  Grid.Row="1"  Margin="5" Name="lvUsers" ItemsSource="{Binding Clients}" AutoGenerateColumns="False">
+            <DataGrid.Columns>
+                <DataGridTextColumn Width="*" Binding="{Binding ClientId}" Header="ID" Visibility="Hidden"/>
+                <DataGridTextColumn Width="*" Binding="{Binding FirstName}" Header="Keresztnév"/>
+                <DataGridTextColumn Width="*" Binding="{Binding LastName}" Header="Vezetéknév"/>
+                <DataGridTextColumn Width="*" Binding="{Binding BirthDate}" Header="Születési Dátum"/>
+                <DataGridTextColumn Width="*" Binding="{Binding BirthPlace}" Header="Születési hely"/>
+                <DataGridTextColumn Width="*" Binding="{Binding SocialSecNum}" Header="Taj szám"/>
+                <DataGridTextColumn Width="*" Binding="{Binding TaxNum}" Header="Adószám"/>
+                <DataGridTextColumn Width="*" Binding="{Binding DateRegistered}" Header="Regisztrálás"/>
+            </DataGrid.Columns>
         </DataGrid>
-        <DataGrid  Grid.Row="2" Margin="5" Name="lvUsers2" ItemsSource="{Binding }" AutoGenerateColumns="True">
+        <DataGrid  Grid.Row="2"  Margin="5"  Name="lvUsers2" ItemsSource="{Binding Cars }" AutoGenerateColumns="True">
         </DataGrid>
-        <DataGrid  Grid.Row="3" Margin="5" Name="lvUsers3" ItemsSource="{Binding Clients}" AutoGenerateColumns="True">
+        <DataGrid  Grid.Row="3"  Margin="5" Name="lvUsers3" ItemsSource="{Binding Services}" AutoGenerateColumns="True">
         </DataGrid>
-        <DataGrid  Grid.Row="4" Margin="5" Name="lvUsers4" ItemsSource="{Binding Clients}" AutoGenerateColumns="True">
+        <DataGrid  Grid.Row="4"  Margin="5" Name="lvUsers4" ItemsSource="{Binding Parts}" AutoGenerateColumns="True">
         </DataGrid>
-        <DataGrid  Grid.Row="5" Margin="5" Name="lvUsers5" ItemsSource="{Binding Clients}" AutoGenerateColumns="True">
+        <DataGrid  Grid.Row="5"  Margin="5" Name="lvUsers5" ItemsSource="{Binding Worksheets}" AutoGenerateColumns="True">
         </DataGrid>
     </Grid>
 </Window>
