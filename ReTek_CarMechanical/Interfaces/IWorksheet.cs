@@ -7,8 +7,6 @@ namespace ReTek_CarMechanical.Interfaces
     {
         bool UploadWorksheet(Worksheet worksheet);
 
-        Worksheet GetSingleWorksheet(Worksheet worksheet);
-
         List<Worksheet> GetAllWorksheet();
     }
 }

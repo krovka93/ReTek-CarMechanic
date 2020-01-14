@@ -54,6 +54,7 @@ namespace ReTek_CarMechanical.Helpers
                 cmd.Parameters.Add(new OracleParameter(":CarDateOfProd", newCar.CarDateofProduce));
                 cmd.Parameters.Add(new OracleParameter(":CarVin", newCar.CarVIN));
                 cmd.Parameters.Add(new OracleParameter(":CarOwner", newCar.CarOwner));
+                cmd.Connection = oracleConnection;
                 rowsUpdated = cmd.ExecuteNonQuery();
             }
             catch (Exception) { }
@@ -66,11 +67,6 @@ namespace ReTek_CarMechanical.Helpers
         }
 
         public bool UpdateExistingCar(Car existingCar)
-        {
-            throw new NotImplementedException();
-        }
-
-        public Car GetSingleCar(Car oneCar)
         {
             throw new NotImplementedException();
         }
@@ -110,11 +106,6 @@ namespace ReTek_CarMechanical.Helpers
                 oracleConnection.Close();
             }
             return allCars;
-        }
-
-        public Client GetSingleClient(Client client)
-        {
-            throw new NotImplementedException();
         }
 
         public List<Client> GetAllClient()
@@ -178,6 +169,7 @@ namespace ReTek_CarMechanical.Helpers
                 cmd.Parameters.Add(new OracleParameter(":SocialSecNum", client.SocialSecNum));
                 cmd.Parameters.Add(new OracleParameter(":TaxNum", client.TaxNum));
                 cmd.Parameters.Add(new OracleParameter(":DateRegistered", client.DateRegistered));
+                cmd.Connection = oracleConnection;
                 rowsUpdated = cmd.ExecuteNonQuery();
             }
             catch (Exception) { }
@@ -187,11 +179,6 @@ namespace ReTek_CarMechanical.Helpers
             }
 
             return rowsUpdated > 0 ? true : false;
-        }
-
-        public Part GetSinglePart(Part part)
-        {
-            throw new NotImplementedException();
         }
 
         public List<Part> GetAllPart()
@@ -210,7 +197,7 @@ namespace ReTek_CarMechanical.Helpers
                         Part onePart = new Part()
                         {
                             PartID = dr.GetInt32(0),
-                            PartName = dr. GetString(1),
+                            PartName = dr.GetString(1),
                             Price = dr.GetInt32(2),
                             Quantity = dr.GetInt32(3)
                         };
@@ -241,6 +228,7 @@ namespace ReTek_CarMechanical.Helpers
                 cmd.Parameters.Add(new OracleParameter(":PartName", part.PartName));
                 cmd.Parameters.Add(new OracleParameter(":Price", part.Price));
                 cmd.Parameters.Add(new OracleParameter(":Quantity", part.Quantity));
+                cmd.Connection = oracleConnection;
                 rowsUpdated = cmd.ExecuteNonQuery();
             }
             catch (Exception) { }
@@ -269,24 +257,23 @@ namespace ReTek_CarMechanical.Helpers
             {
                 oracleConnection.Open();
                 OracleCommand cmd = new OracleCommand();
-                cmd.CommandText = "INSERT INTO CLIENTS (SERVICE_NAME, PRICE)" +
+                cmd.CommandText = "INSERT INTO SERVICES (SERVICE_NAME, PRICE)" +
                     " VALUES (:ServiceName, :Price )";
                 cmd.Parameters.Add(new OracleParameter(":ServiceName", service.ServiceName));
                 cmd.Parameters.Add(new OracleParameter(":Price", service.ServicePrice));
+                cmd.Connection = oracleConnection;
                 rowsUpdated = cmd.ExecuteNonQuery();
             }
-            catch (Exception) { }
+            catch (Exception e)
+            {
+                throw e;
+            }
             finally
             {
                 oracleConnection.Close();
             }
 
             return rowsUpdated > 0 ? true : false;
-        }
-
-        public Service GetSingleService(Service service)
-        {
-            throw new NotImplementedException();
         }
 
         public List<Service> GetAllService()
@@ -352,11 +339,6 @@ namespace ReTek_CarMechanical.Helpers
             }
 
             return rowsUpdated > 0 ? true : false;
-        }
-
-        public Worksheet GetSingleWorksheet(Worksheet worksheet)
-        {
-            throw new NotImplementedException();
         }
 
         public List<Worksheet> GetAllWorksheet()
