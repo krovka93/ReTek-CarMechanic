@@ -15,7 +15,7 @@
             <Label Content="Válassza ki a regisztrálandó gépjármű tulajdonosát"></Label>
             <ComboBox ItemsSource="{Binding Clients.FirstName}" SelectedItem="{Binding SelectedClient}"/>
             <Label Content="Rendszám"></Label>
-            <TextBox Text="{Binding CarPlateNumber}"></TextBox>
+            <TextBox Text="{Binding CarPlateNumber, UpdateSourceTrigger=PropertyChanged}"></TextBox>
             <Label Content="Gépjármű típusa"></Label>
             <TextBox Text="{Binding CarType}"></TextBox>
             <Label Content="Gyártási dátum"></Label>

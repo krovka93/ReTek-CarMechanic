@@ -2,23 +2,41 @@
 using ReTek_CarMechanical.Models;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Windows;
 using System.Windows.Input;
 
 namespace ReTek_CarMechanical.ViewModels
 {
-    class CarViewModel
+    class CarViewModel : INotifyPropertyChanged
     {
         public List<Client> Clients { get { return BussinessLayer.Instance.GetAllClient(); } }
 
-        public Client SelectedClient { get; set; }
+        private Client _selectedClient;
 
-        public string CarPlateNumber { get; set; }
+        public Client SelectedClient
+        {
+            get { return _selectedClient; }
+            set { _selectedClient = value; OnPropertyChanged("SelectedClient"); }
+        }
+
+
+        private string _carPlateNumber;
+
+        public string CarPlateNumber
+        {
+            get { return _carPlateNumber; }
+            set { _carPlateNumber = value; OnPropertyChanged("CarPlateNumber"); }
+        }
+
         public string CarType { get; set; }
         public DateTime CarDateofProduce { get; set; }
         public int CarVIN { get; set; }
 
         private ICommand _addNewCarCommandHandler;
+
+        public event PropertyChangedEventHandler PropertyChanged;
+
         public ICommand AddNewCarCommandHandler
         {
             get
@@ -40,6 +58,15 @@ namespace ReTek_CarMechanical.ViewModels
 
 
            MessageBox.Show(result ? "Sikeres hozzáadás" : "SIKERTELEN hozzáadás", "Gépjármű hozzáadása");
+        }
+
+        protected void OnPropertyChanged(string name)
+        {
+            PropertyChangedEventHandler handler = PropertyChanged;
+            if (handler != null)
+            {
+                handler(this, new PropertyChangedEventArgs(name));
+            }
         }
     }
 }
