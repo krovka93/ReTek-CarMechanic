@@ -2,6 +2,7 @@
 using ReTek_CarMechanical.Models;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -10,13 +11,32 @@ using System.Windows.Input;
 
 namespace ReTek_CarMechanical.ViewModels
 {
-   class ServiceViewModel
-   {
-      public string ServiceName { get; set; }
-      public int ServicePrice { get; set; }
+   class ServiceViewModel : INotifyPropertyChanged
+    {
+      
+        private string _serviceName;
 
-      private ICommand _addNewServiceCommandHandler;
-      public ICommand AddNewServiceCommandHandler
+        public string ServiceName
+        {
+            get { return _serviceName; }
+            set { _serviceName = value; OnPropertyChanged("ServiceName"); }
+        }
+
+        
+        private int _servicePrice;
+
+        public int ServicePrice
+        {
+            get { return _servicePrice; }
+            set { _servicePrice = value; OnPropertyChanged("ServicePrice"); }
+        }
+
+
+        private ICommand _addNewServiceCommandHandler;
+
+        public event PropertyChangedEventHandler PropertyChanged;
+
+        public ICommand AddNewServiceCommandHandler
       {
          get
          {
@@ -36,5 +56,13 @@ namespace ReTek_CarMechanical.ViewModels
 
          MessageBox.Show(result ? "Sikeres hozzáadás" : "SIKERTELEN hozzáadás", "Szolgáltatás hozzáadása");
       }
-   }
+        protected void OnPropertyChanged(string name)
+        {
+            PropertyChangedEventHandler handler = PropertyChanged;
+            if (handler != null)
+            {
+                handler(this, new PropertyChangedEventArgs(name));
+            }
+        }
+    }
 }

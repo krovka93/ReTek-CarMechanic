@@ -2,6 +2,7 @@
 using ReTek_CarMechanical.Models;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -10,13 +11,40 @@ using System.Windows.Input;
 
 namespace ReTek_CarMechanical.ViewModels
 {
-    class PartViewModel
+    class PartViewModel : INotifyPropertyChanged
     {
-        public string PartName { get; set; }
-        public int PartPrice { get; set; }
-        public int Quantity { get; set; }
+       
+        private string _partName;
+
+        public string PartName
+        {
+            get { return _partName; }
+            set { _partName = value; OnPropertyChanged("PartName"); }
+        }
+
+        
+        private int _partPrice;
+
+        public int PartPrice
+        {
+            get { return _partPrice; }
+            set { _partPrice = value; OnPropertyChanged("PartPrice"); }
+        }
+
+       
+        private int _quantity;
+
+        public int Quantity
+        {
+            get { return _quantity; }
+            set { _quantity = value; OnPropertyChanged("Quantity"); }
+        }
+
 
         private ICommand _addNewPartCommandHandler;
+
+        public event PropertyChangedEventHandler PropertyChanged;
+
         public ICommand AddNewPartCommandHandler
         {
             get
@@ -27,7 +55,7 @@ namespace ReTek_CarMechanical.ViewModels
 
         private void AddNewPartCommandAction()
         {
-            var result = BussinessLayer.Instance.UpdatePart(new Part()
+            var result = BussinessLayer.Instance.AddPart(new Part()
             {
                 PartName = PartName,
                 Price = PartPrice,
@@ -38,6 +66,14 @@ namespace ReTek_CarMechanical.ViewModels
 
 
             MessageBox.Show(result ? "Sikeres hozzáadás" : "SIKERTELEN hozzáadás", "Alkatrész hozzáadása");
+        }
+        protected void OnPropertyChanged(string name)
+        {
+            PropertyChangedEventHandler handler = PropertyChanged;
+            if (handler != null)
+            {
+                handler(this, new PropertyChangedEventArgs(name));
+            }
         }
     }
 }

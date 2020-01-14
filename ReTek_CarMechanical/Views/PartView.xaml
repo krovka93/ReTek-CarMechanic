@@ -16,13 +16,11 @@
         <StackPanel Grid.ColumnSpan="2" Margin="0,0,-0.4,0">
             <Label Content="Válassza ki a kívánt alkatrészeket!"></Label>
             <Label Content="Alkatrész neve"></Label>
-            <TextBox Text="{Binding PartName}"></TextBox>
-            <Label Content="Alkatrész márkája"></Label>
-            <TextBox Text="{Binding CarType}"></TextBox>
+            <TextBox Text="{Binding PartName,UpdateSourceTrigger=PropertyChanged}"></TextBox>
             <Label Content="Alketrész ára"></Label>
-            <TextBox Text="{Binding PartPrice}"></TextBox>
+            <TextBox Text="{Binding PartPrice,UpdateSourceTrigger=PropertyChanged}"></TextBox>
             <Label Content="Készlet"></Label>
-            <TextBox Text="{Binding PartQuantity}"></TextBox>
+            <TextBox Text="{Binding PartQuantity,UpdateSourceTrigger=PropertyChanged}"></TextBox>
             <Button Content="Alkatrészek regisztrálása" Command="{Binding AddNewPartCommandHandler}"></Button>
         </StackPanel>
     </Grid>
