@@ -37,15 +37,15 @@ namespace ReTek_CarMechanical.ViewModels
             set { _birthPlace = value; OnPropertyChanged("BirthPlace"); }
         }
 
-        private int _socialSecNum;
-        public int SocialSecNum
+        private string _socialSecNum;
+        public string SocialSecNum
         {
             get { return _socialSecNum; }
             set { _socialSecNum = value; OnPropertyChanged("SocialSecNum"); }
         }
 
-        private int _taxNum;
-        public int TaxNum
+        private string _taxNum;
+        public string TaxNum
         {
             get { return _taxNum; }
             set { _taxNum = value; OnPropertyChanged("TaxNum"); }
