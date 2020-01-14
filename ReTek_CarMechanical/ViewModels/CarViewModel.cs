@@ -42,8 +42,8 @@ namespace ReTek_CarMechanical.ViewModels
             set { _carDateofProduce = value; OnPropertyChanged("CarDateofProduce"); }
         }
 
-        private int _carVIN;
-        public int CarVIN
+        private string _carVIN;
+        public string CarVIN
         {
             get { return _carVIN; }
             set { _carVIN = value; OnPropertyChanged("CarVIN"); }
