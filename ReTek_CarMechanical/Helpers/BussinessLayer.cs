@@ -4,6 +4,7 @@ using ReTek_CarMechanical.Models;
 using System;
 using System.Collections.Generic;
 using System.Data;
+using System.Linq;
 using System.Windows;
 
 namespace ReTek_CarMechanical.Helpers
@@ -385,7 +386,41 @@ namespace ReTek_CarMechanical.Helpers
         }
         public List<Car> GetAllCarByUser(Client selectedClient)
         {
-            throw new NotImplementedException();
+            List<Car> allCars = new List<Car>();
+            oracleConnection = new OracleConnection(oracleDbConnectionString);
+            try
+            {
+                oracleConnection.Open();
+                var commandText = "SELECT * FROM Cars WHERE car_owner= :id";
+                
+                using (OracleCommand command = new OracleCommand(commandText, oracleConnection))
+                {
+                    command.Parameters.Add(new OracleParameter(":id",selectedClient.ClientID));
+                    OracleDataReader dr = command.ExecuteReader();
+                    while (dr.Read())
+                    {
+                        Car oneCar = new Car()
+                        {
+                            CarID = dr.GetInt32(0),
+                            CarPlateNumber = dr.GetString(1),
+                            CarType = dr.GetString(2),
+                            CarDateofProduce = dr.GetDateTime(3),
+                            CarVIN = dr.GetString(4),
+                            CarOwner = dr.GetInt32(5)
+                        };
+                        allCars.Add(oneCar);
+                    }
+                }
+            }
+            catch (Exception e)
+            {
+                throw e;
+            }
+            finally
+            {
+                oracleConnection.Close();
+            }
+            return allCars;
         }
 
         #endregion
