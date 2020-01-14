@@ -71,7 +71,38 @@ namespace ReTek_CarMechanical.Helpers
 
         public List<Client> GetAllClient()
         {
-            throw new NotImplementedException();
+            List<Client> allClients = new List<Client>();
+            oracleConnection = new OracleConnection(oracleDbConnectionString);
+            try
+            {
+                oracleConnection.Open();
+                var commandText = "SELECT * FROM Clients";
+                using (OracleCommand command = new OracleCommand(commandText, oracleConnection))
+                {
+                    OracleDataReader dr = command.ExecuteReader();
+                    dr.Read();
+                    foreach (var item in dr)
+                    {
+                        Client oneClient = new Client()
+                        {
+                            ClientID = int.Parse(dr.GetString(0)),
+                            FirstName = dr.GetString(1),
+                            LastName = dr.GetString(2),
+                            BirthDate = DateTime.Parse(dr.GetString(3)),
+                            BirthPlace = dr.GetString(4),
+                            SocialSecNum = int.Parse(dr.GetString(5)),
+                            TaxNum = int.Parse(dr.GetString(6)),
+                            DateRegistered = DateTime.Parse(dr.GetString(7))
+                        };
+                        allClients.Add(oneClient);
+                    }
+                }
+            }
+            catch (Exception e)
+            { 
+                throw e;
+            }
+            return allClients;
         }
 
         public bool UpdateClient(Client client)
@@ -91,7 +122,34 @@ namespace ReTek_CarMechanical.Helpers
 
         public List<Part> GetAllPart()
         {
-            throw new NotImplementedException();
+            List<Part> allParts = new List<Part>();
+            oracleConnection = new OracleConnection(oracleDbConnectionString);
+            try
+            {
+                oracleConnection.Open();
+                var commandText = "SELECT * FROM Parts";
+                using (OracleCommand command = new OracleCommand(commandText, oracleConnection))
+                {
+                    OracleDataReader dr = command.ExecuteReader();
+                    dr.Read();
+                    foreach (var item in dr)
+                    {
+                        Part onePart = new Part()
+                        {
+                            PartID = int.Parse(dr.GetString(0)),
+                            PartName = dr.GetString(1),
+                            Price = int.Parse(dr.GetString(2)),
+                            Quantity = int.Parse(dr.GetString(3))
+                        };
+                        allParts.Add(onePart);
+                    }
+                }
+            }
+            catch (Exception e)
+            {
+                throw e;
+            }
+            return allParts;
         }
 
         public bool AddPart(Part part)
