@@ -39,14 +39,30 @@ namespace ReTek_CarMechanical.Helpers
             }
         }
 
-        public string Test()
-        {
-            return "Tesztszöveg a BussinessLayer-en keresztül";
-        }
-
         public bool UploadNewCar(Car newCar)
         {
-            throw new NotImplementedException();
+            int rowsUpdated = 0;
+            try
+            {
+                oracleConnection.Open();
+                OracleCommand cmd = new OracleCommand();
+                cmd.CommandText = "INSERT INTO CARS (CAR_PLATE_NUM, CAR_TYPE, CAR_DATE_OF_PROD, " +
+                    "CAR_VIN, CAR_OWNER)" +
+                    " VALUES (:CarPlateNum, :CarType, :CarDateOfProd, :CarVin, :CarOwner )";
+                cmd.Parameters.Add(new OracleParameter(":CarPlateNum", newCar.CarPlateNumber));
+                cmd.Parameters.Add(new OracleParameter(":CarType", newCar.CarType));
+                cmd.Parameters.Add(new OracleParameter(":CarDateOfProd", newCar.CarDateofProduce));
+                cmd.Parameters.Add(new OracleParameter(":CarVin", newCar.CarVIN));
+                cmd.Parameters.Add(new OracleParameter(":CarOwner", newCar.CarOwner));
+                rowsUpdated = cmd.ExecuteNonQuery();
+            }
+            catch (Exception) { }
+            finally
+            {
+                oracleConnection.Close();
+            }
+
+            return rowsUpdated > 0 ? true : false;
         }
 
         public bool UpdateExistingCar(Car existingCar)
@@ -61,7 +77,39 @@ namespace ReTek_CarMechanical.Helpers
 
         public List<Car> GetAllCar()
         {
-            throw new NotImplementedException();
+            List<Car> allCars = new List<Car>();
+            oracleConnection = new OracleConnection(oracleDbConnectionString);
+            try
+            {
+                oracleConnection.Open();
+                var commandText = "SELECT * FROM Cars";
+                using (OracleCommand command = new OracleCommand(commandText, oracleConnection))
+                {
+                    OracleDataReader dr = command.ExecuteReader();
+                    while (dr.Read())
+                    {
+                        Car oneCar = new Car()
+                        {
+                            CarID = dr.GetInt32(0),
+                            CarPlateNumber = dr.GetString(1),
+                            CarType = dr.GetString(2),
+                            CarDateofProduce = dr.GetDateTime(3),
+                            CarVIN = dr.GetString(4),
+                            CarOwner = dr.GetInt32(5)
+                        };
+                        allCars.Add(oneCar);
+                    }
+                }
+            }
+            catch (Exception e)
+            {
+                throw e;
+            }
+            finally
+            {
+                oracleConnection.Close();
+            }
+            return allCars;
         }
 
         public Client GetSingleClient(Client client)
@@ -101,6 +149,10 @@ namespace ReTek_CarMechanical.Helpers
             {
                 throw e;
             }
+            finally
+            {
+                oracleConnection.Close();
+            }
             return allClients;
         }
 
@@ -111,7 +163,30 @@ namespace ReTek_CarMechanical.Helpers
 
         public bool AddClient(Client client)
         {
-            throw new NotImplementedException();
+            int rowsUpdated = 0;
+            try
+            {
+                oracleConnection.Open();
+                OracleCommand cmd = new OracleCommand();
+                cmd.CommandText = "INSERT INTO CLIENTS (FIRST_NAME, LAST_NAME, BIRTH_DATE, " +
+                    "BIRTH_PLACE, SOCIAL_SEC_NUM, TAX_NUM, DATE_REGISTERED)" +
+                    " VALUES (:FirstName, :LastName, :BirthDate, :BirthPlace, :SocialSecNum, :TaxNum, :DateRegistered, :PartId )";
+                cmd.Parameters.Add(new OracleParameter(":FirstName", client.FirstName));
+                cmd.Parameters.Add(new OracleParameter(":LastName", client.LastName));
+                cmd.Parameters.Add(new OracleParameter(":BirthDate", client.BirthDate));
+                cmd.Parameters.Add(new OracleParameter(":BirthPlace", client.BirthPlace));
+                cmd.Parameters.Add(new OracleParameter(":SocialSecNum", client.SocialSecNum));
+                cmd.Parameters.Add(new OracleParameter(":TaxNum", client.TaxNum));
+                cmd.Parameters.Add(new OracleParameter(":DateRegistered", client.DateRegistered));
+                rowsUpdated = cmd.ExecuteNonQuery();
+            }
+            catch (Exception) { }
+            finally
+            {
+                oracleConnection.Close();
+            }
+
+            return rowsUpdated > 0 ? true : false;
         }
 
         public Part GetSinglePart(Part part)
@@ -141,19 +216,40 @@ namespace ReTek_CarMechanical.Helpers
                         };
                         allParts.Add(onePart);
                     }
-                    
                 }
             }
             catch (Exception e)
             {
                 throw e;
             }
+            finally
+            {
+                oracleConnection.Close();
+            }
             return allParts;
         }
 
         public bool AddPart(Part part)
         {
-            throw new NotImplementedException();
+            int rowsUpdated = 0;
+            try
+            {
+                oracleConnection.Open();
+                OracleCommand cmd = new OracleCommand();
+                cmd.CommandText = "INSERT INTO PARTS (PART_NAME, PRICE, QUANTITY)" +
+                    " VALUES (:PartName, :Price, :Quantity )";
+                cmd.Parameters.Add(new OracleParameter(":PartName", part.PartName));
+                cmd.Parameters.Add(new OracleParameter(":Price", part.Price));
+                cmd.Parameters.Add(new OracleParameter(":Quantity", part.Quantity));
+                rowsUpdated = cmd.ExecuteNonQuery();
+            }
+            catch (Exception) { }
+            finally
+            {
+                oracleConnection.Close();
+            }
+
+            return rowsUpdated > 0 ? true : false;
         }
 
         public bool UpdatePart(Part part)
@@ -168,7 +264,24 @@ namespace ReTek_CarMechanical.Helpers
 
         public bool AddNewService(Service service)
         {
-            throw new NotImplementedException();
+            int rowsUpdated = 0;
+            try
+            {
+                oracleConnection.Open();
+                OracleCommand cmd = new OracleCommand();
+                cmd.CommandText = "INSERT INTO CLIENTS (SERVICE_NAME, PRICE)" +
+                    " VALUES (:ServiceName, :Price )";
+                cmd.Parameters.Add(new OracleParameter(":ServiceName", service.ServiceName));
+                cmd.Parameters.Add(new OracleParameter(":Price", service.ServicePrice));
+                rowsUpdated = cmd.ExecuteNonQuery();
+            }
+            catch (Exception) { }
+            finally
+            {
+                oracleConnection.Close();
+            }
+
+            return rowsUpdated > 0 ? true : false;
         }
 
         public Service GetSingleService(Service service)
@@ -248,7 +361,42 @@ namespace ReTek_CarMechanical.Helpers
 
         public List<Worksheet> GetAllWorksheet()
         {
-            throw new NotImplementedException();
+            List<Worksheet> allWorksheets = new List<Worksheet>();
+            oracleConnection = new OracleConnection(oracleDbConnectionString);
+            try
+            {
+                oracleConnection.Open();
+                var commandText = "SELECT * FROM Worksheets";
+                using (OracleCommand command = new OracleCommand(commandText, oracleConnection))
+                {
+                    OracleDataReader dr = command.ExecuteReader();
+                    while (dr.Read())
+                    {
+                        Worksheet oneWorksheet = new Worksheet()
+                        {
+                            WorksheetID = dr.GetInt32(0),
+                            WorkStart = dr.GetDateTime(1),
+                            ExpectedEnd = dr.GetDateTime(2),
+                            WorkActualEnd = dr.GetDateTime(3),
+                            KilometerState = dr.GetInt32(4),
+                            UniqueId = dr.GetString(5),
+                            CarID = dr.GetInt32(6),
+                            ServiceID = dr.GetInt32(7),
+                            PartID = dr.GetInt32(8)
+                        };
+                        allWorksheets.Add(oneWorksheet);
+                    }
+                }
+            }
+            catch (Exception e)
+            {
+                throw e;
+            }
+            finally
+            {
+                oracleConnection.Close();
+            }
+            return allWorksheets;
         }
         public List<Car> GetAllCarByUser(Client selectedClient)
         {

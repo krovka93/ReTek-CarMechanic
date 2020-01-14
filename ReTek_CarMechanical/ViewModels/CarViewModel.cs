@@ -66,7 +66,7 @@ namespace ReTek_CarMechanical.ViewModels
         {
            var result = BussinessLayer.Instance.UploadNewCar(new Car()
             {
-                CarOwner = SelectedClient,
+                CarOwner = SelectedClient.ClientID,
                 CarDateofProduce = CarDateofProduce,
                 CarPlateNumber = CarPlateNumber,
                 CarType = CarType,
