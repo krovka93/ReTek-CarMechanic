@@ -5,18 +5,43 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:ReTek_CarMechanical"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
+        Title="MainWindow" Height="800" Width="800" WindowStartupLocation="CenterScreen">
     <Grid>
-        <StackPanel>
-            <Button Content="Ügyfelek" Command="{Binding ClientCommandHandler}"></Button>
-            <Button Content="Gépjárművek" Command="{Binding CarCommandHandler}"></Button>
-            <Button Content="Szolgáltatások" Command="{Binding ServiceCommandHandler}"></Button>
-            <Button Content="Alkatrészek" Command="{Binding PartCommandHandler}"></Button>
-            <Button Content="Munkalap"></Button>
-            <DataGrid Margin="10" Name="lvUsers" ItemsSource="{Binding Clients}" AutoGenerateColumns="True" >
-                
-            </DataGrid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="1*" />
+            <RowDefinition Height="2*" />
+            <RowDefinition Height="2*" />
+            <RowDefinition Height="2*" />
+            <RowDefinition Height="2*" />
+            <RowDefinition Height="2*" />
 
-        </StackPanel>
+        </Grid.RowDefinitions>
+        <Grid Grid.Row="0">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="1*" />
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="1*"/>
+                <ColumnDefinition Width="1*"/>
+                <ColumnDefinition Width="1*"/>
+                <ColumnDefinition Width="1*"/>
+                <ColumnDefinition Width="1*"/>
+            </Grid.ColumnDefinitions>
+            <Button Grid.Row="0" Grid.Column="0" Margin="5" Content="Ügyfelek" Command="{Binding ClientCommandHandler}"></Button>
+            <Button Grid.Row="0" Grid.Column="1" Margin="5" Content="Gépjárművek" Command="{Binding CarCommandHandler}"></Button>
+            <Button Grid.Row="0" Grid.Column="2" Margin="5" Content="Szolgáltatások" Command="{Binding ServiceCommandHandler}"></Button>
+            <Button Grid.Row="0" Grid.Column="3" Margin="5" Content="Alkatrészek" Command="{Binding PartCommandHandler}"></Button>
+            <Button Grid.Row="0" Grid.Column="4" Margin="5" Content="Munkalap"></Button>
+        </Grid>
+        <DataGrid  Grid.Row="1" Margin="5" Name="lvUsers" ItemsSource="{Binding Clients}" AutoGenerateColumns="True">
+        </DataGrid>
+        <DataGrid  Grid.Row="2" Margin="5" Name="lvUsers2" ItemsSource="{Binding }" AutoGenerateColumns="True">
+        </DataGrid>
+        <DataGrid  Grid.Row="3" Margin="5" Name="lvUsers3" ItemsSource="{Binding Clients}" AutoGenerateColumns="True">
+        </DataGrid>
+        <DataGrid  Grid.Row="4" Margin="5" Name="lvUsers4" ItemsSource="{Binding Clients}" AutoGenerateColumns="True">
+        </DataGrid>
+        <DataGrid  Grid.Row="5" Margin="5" Name="lvUsers5" ItemsSource="{Binding Clients}" AutoGenerateColumns="True">
+        </DataGrid>
     </Grid>
 </Window>
