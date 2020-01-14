@@ -22,16 +22,33 @@ namespace ReTek_CarMechanical.ViewModels
 
 
         private string _carPlateNumber;
-
         public string CarPlateNumber
         {
             get { return _carPlateNumber; }
             set { _carPlateNumber = value; OnPropertyChanged("CarPlateNumber"); }
         }
 
-        public string CarType { get; set; }
-        public DateTime CarDateofProduce { get; set; }
-        public int CarVIN { get; set; }
+        private string _carType;
+        public string CarType
+        {
+            get { return _carType; }
+            set { _carType = value; OnPropertyChanged("CarType"); }
+        }
+
+        private DateTime _carDateofProduce;
+        public DateTime CarDateofProduce
+        {
+            get { return _carDateofProduce; }
+            set { _carDateofProduce = value; OnPropertyChanged("CarDateofProduce"); }
+        }
+
+        private int _carVIN;
+        public int CarVIN
+        {
+            get { return _carVIN; }
+            set { _carVIN = value; OnPropertyChanged("CarVIN"); }
+        }
+
 
         private ICommand _addNewCarCommandHandler;
 
