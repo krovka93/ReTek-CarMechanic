@@ -39,14 +39,30 @@ namespace ReTek_CarMechanical.Helpers
             }
         }
 
-        public string Test()
-        {
-            return "Tesztszöveg a BussinessLayer-en keresztül";
-        }
-
         public bool UploadNewCar(Car newCar)
         {
-            throw new NotImplementedException();
+            int rowsUpdated = 0;
+            try
+            {
+                oracleConnection.Open();
+                OracleCommand cmd = new OracleCommand();
+                cmd.CommandText = "INSERT INTO CARS (CAR_PLATE_NUM, CAR_TYPE, CAR_DATE_OF_PROD, " +
+                    "CAR_VIN, CAR_OWNER)" +
+                    " VALUES (:CarPlateNum, :CarType, :CarDateOfProd, :CarVin, :CarOwner )";
+                cmd.Parameters.Add(new OracleParameter(":CarPlateNum", newCar.CarPlateNumber));
+                cmd.Parameters.Add(new OracleParameter(":CarType", newCar.CarType));
+                cmd.Parameters.Add(new OracleParameter(":CarDateOfProd", newCar.CarDateofProduce));
+                cmd.Parameters.Add(new OracleParameter(":CarVin", newCar.CarVIN));
+                cmd.Parameters.Add(new OracleParameter(":CarOwner", newCar.CarOwner));
+                rowsUpdated = cmd.ExecuteNonQuery();
+            }
+            catch (Exception) { }
+            finally
+            {
+                oracleConnection.Close();
+            }
+
+            return rowsUpdated > 0 ? true : false;
         }
 
         public bool UpdateExistingCar(Car existingCar)
@@ -101,6 +117,10 @@ namespace ReTek_CarMechanical.Helpers
             {
                 throw e;
             }
+            finally
+            {
+                oracleConnection.Close();
+            }
             return allClients;
         }
 
@@ -111,7 +131,30 @@ namespace ReTek_CarMechanical.Helpers
 
         public bool AddClient(Client client)
         {
-            throw new NotImplementedException();
+            int rowsUpdated = 0;
+            try
+            {
+                oracleConnection.Open();
+                OracleCommand cmd = new OracleCommand();
+                cmd.CommandText = "INSERT INTO CLIENTS (FIRST_NAME, LAST_NAME, BIRTH_DATE, " +
+                    "BIRTH_PLACE, SOCIAL_SEC_NUM, TAX_NUM, DATE_REGISTERED)" +
+                    " VALUES (:FirstName, :LastName, :BirthDate, :BirthPlace, :SocialSecNum, :TaxNum, :DateRegistered, :PartId )";
+                cmd.Parameters.Add(new OracleParameter(":FirstName", client.FirstName));
+                cmd.Parameters.Add(new OracleParameter(":LastName", client.LastName));
+                cmd.Parameters.Add(new OracleParameter(":BirthDate", client.BirthDate));
+                cmd.Parameters.Add(new OracleParameter(":BirthPlace", client.BirthPlace));
+                cmd.Parameters.Add(new OracleParameter(":SocialSecNum", client.SocialSecNum));
+                cmd.Parameters.Add(new OracleParameter(":TaxNum", client.TaxNum));
+                cmd.Parameters.Add(new OracleParameter(":DateRegistered", client.DateRegistered));
+                rowsUpdated = cmd.ExecuteNonQuery();
+            }
+            catch (Exception) { }
+            finally
+            {
+                oracleConnection.Close();
+            }
+
+            return rowsUpdated > 0 ? true : false;
         }
 
         public Part GetSinglePart(Part part)
@@ -141,19 +184,40 @@ namespace ReTek_CarMechanical.Helpers
                         };
                         allParts.Add(onePart);
                     }
-                    
                 }
             }
             catch (Exception e)
             {
                 throw e;
             }
+            finally
+            {
+                oracleConnection.Close();
+            }
             return allParts;
         }
 
         public bool AddPart(Part part)
         {
-            throw new NotImplementedException();
+            int rowsUpdated = 0;
+            try
+            {
+                oracleConnection.Open();
+                OracleCommand cmd = new OracleCommand();
+                cmd.CommandText = "INSERT INTO PARTS (PART_NAME, PRICE, QUANTITY)" +
+                    " VALUES (:PartName, :Price, :Quantity )";
+                cmd.Parameters.Add(new OracleParameter(":PartName", part.PartName));
+                cmd.Parameters.Add(new OracleParameter(":Price", part.Price));
+                cmd.Parameters.Add(new OracleParameter(":Quantity", part.Quantity));
+                rowsUpdated = cmd.ExecuteNonQuery();
+            }
+            catch (Exception) { }
+            finally
+            {
+                oracleConnection.Close();
+            }
+
+            return rowsUpdated > 0 ? true : false;
         }
 
         public bool UpdatePart(Part part)
@@ -168,7 +232,24 @@ namespace ReTek_CarMechanical.Helpers
 
         public bool AddNewService(Service service)
         {
-            throw new NotImplementedException();
+            int rowsUpdated = 0;
+            try
+            {
+                oracleConnection.Open();
+                OracleCommand cmd = new OracleCommand();
+                cmd.CommandText = "INSERT INTO CLIENTS (SERVICE_NAME, PRICE)" +
+                    " VALUES (:ServiceName, :Price )";
+                cmd.Parameters.Add(new OracleParameter(":ServiceName", service.ServiceName));
+                cmd.Parameters.Add(new OracleParameter(":Price", service.ServicePrice));
+                rowsUpdated = cmd.ExecuteNonQuery();
+            }
+            catch (Exception) { }
+            finally
+            {
+                oracleConnection.Close();
+            }
+
+            return rowsUpdated > 0 ? true : false;
         }
 
         public Service GetSingleService(Service service)
