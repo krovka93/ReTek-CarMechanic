@@ -77,7 +77,39 @@ namespace ReTek_CarMechanical.Helpers
 
         public List<Car> GetAllCar()
         {
-            throw new NotImplementedException();
+            List<Car> allCars = new List<Car>();
+            oracleConnection = new OracleConnection(oracleDbConnectionString);
+            try
+            {
+                oracleConnection.Open();
+                var commandText = "SELECT * FROM Cars";
+                using (OracleCommand command = new OracleCommand(commandText, oracleConnection))
+                {
+                    OracleDataReader dr = command.ExecuteReader();
+                    while (dr.Read())
+                    {
+                        Car oneCar = new Car()
+                        {
+                            CarID = dr.GetInt32(0),
+                            CarPlateNumber = dr.GetString(1),
+                            CarType = dr.GetString(2),
+                            CarDateofProduce = dr.GetDateTime(3),
+                            CarVIN = dr.GetString(4),
+                            CarOwner = dr.GetInt32(5)
+                        };
+                        allCars.Add(oneCar);
+                    }
+                }
+            }
+            catch (Exception e)
+            {
+                throw e;
+            }
+            finally
+            {
+                oracleConnection.Close();
+            }
+            return allCars;
         }
 
         public Client GetSingleClient(Client client)
@@ -259,7 +291,37 @@ namespace ReTek_CarMechanical.Helpers
 
         public List<Service> GetAllService()
         {
-            throw new NotImplementedException();
+            List<Service> allServices = new List<Service>();
+            oracleConnection = new OracleConnection(oracleDbConnectionString);
+            try
+            {
+                oracleConnection.Open();
+                var commandText = "SELECT * FROM Services";
+                using (OracleCommand command = new OracleCommand(commandText, oracleConnection))
+                {
+                    OracleDataReader dr = command.ExecuteReader();
+                    while (dr.Read())
+                    {
+                        Service oneService = new Service()
+                        {
+                            ServiceID = dr.GetInt32(0),
+                            ServiceName = dr.GetString(1),
+                            ServicePrice = dr.GetInt32(2)
+                        };
+                        allServices.Add(oneService);
+                    }
+
+                }
+            }
+            catch (Exception e)
+            {
+                throw e;
+            }
+            finally
+            {
+                oracleConnection.Close();
+            }
+            return allServices;
         }
 
         public bool UploadWorksheet(Worksheet worksheet)
@@ -299,7 +361,42 @@ namespace ReTek_CarMechanical.Helpers
 
         public List<Worksheet> GetAllWorksheet()
         {
-            throw new NotImplementedException();
+            List<Worksheet> allWorksheets = new List<Worksheet>();
+            oracleConnection = new OracleConnection(oracleDbConnectionString);
+            try
+            {
+                oracleConnection.Open();
+                var commandText = "SELECT * FROM Worksheets";
+                using (OracleCommand command = new OracleCommand(commandText, oracleConnection))
+                {
+                    OracleDataReader dr = command.ExecuteReader();
+                    while (dr.Read())
+                    {
+                        Worksheet oneWorksheet = new Worksheet()
+                        {
+                            WorksheetID = dr.GetInt32(0),
+                            WorkStart = dr.GetDateTime(1),
+                            ExpectedEnd = dr.GetDateTime(2),
+                            WorkActualEnd = dr.GetDateTime(3),
+                            KilometerState = dr.GetInt32(4),
+                            UniqueId = dr.GetString(5),
+                            CarID = dr.GetInt32(6),
+                            ServiceID = dr.GetInt32(7),
+                            PartID = dr.GetInt32(8)
+                        };
+                        allWorksheets.Add(oneWorksheet);
+                    }
+                }
+            }
+            catch (Exception e)
+            {
+                throw e;
+            }
+            finally
+            {
+                oracleConnection.Close();
+            }
+            return allWorksheets;
         }
         public List<Car> GetAllCarByUser(Client selectedClient)
         {
