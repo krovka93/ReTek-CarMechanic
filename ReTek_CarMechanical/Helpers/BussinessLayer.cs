@@ -54,6 +54,7 @@ namespace ReTek_CarMechanical.Helpers
                 cmd.Parameters.Add(new OracleParameter(":CarDateOfProd", newCar.CarDateofProduce));
                 cmd.Parameters.Add(new OracleParameter(":CarVin", newCar.CarVIN));
                 cmd.Parameters.Add(new OracleParameter(":CarOwner", newCar.CarOwner));
+                cmd.Connection = oracleConnection;
                 rowsUpdated = cmd.ExecuteNonQuery();
             }
             catch (Exception) { }
@@ -178,6 +179,7 @@ namespace ReTek_CarMechanical.Helpers
                 cmd.Parameters.Add(new OracleParameter(":SocialSecNum", client.SocialSecNum));
                 cmd.Parameters.Add(new OracleParameter(":TaxNum", client.TaxNum));
                 cmd.Parameters.Add(new OracleParameter(":DateRegistered", client.DateRegistered));
+                cmd.Connection = oracleConnection;
                 rowsUpdated = cmd.ExecuteNonQuery();
             }
             catch (Exception) { }
@@ -241,6 +243,7 @@ namespace ReTek_CarMechanical.Helpers
                 cmd.Parameters.Add(new OracleParameter(":PartName", part.PartName));
                 cmd.Parameters.Add(new OracleParameter(":Price", part.Price));
                 cmd.Parameters.Add(new OracleParameter(":Quantity", part.Quantity));
+                cmd.Connection = oracleConnection;
                 rowsUpdated = cmd.ExecuteNonQuery();
             }
             catch (Exception) { }
@@ -269,13 +272,17 @@ namespace ReTek_CarMechanical.Helpers
             {
                 oracleConnection.Open();
                 OracleCommand cmd = new OracleCommand();
-                cmd.CommandText = "INSERT INTO CLIENTS (SERVICE_NAME, PRICE)" +
+                cmd.CommandText = "INSERT INTO SERVICES (SERVICE_NAME, PRICE)" +
                     " VALUES (:ServiceName, :Price )";
                 cmd.Parameters.Add(new OracleParameter(":ServiceName", service.ServiceName));
                 cmd.Parameters.Add(new OracleParameter(":Price", service.ServicePrice));
+                cmd.Connection = oracleConnection;
                 rowsUpdated = cmd.ExecuteNonQuery();
             }
-            catch (Exception) { }
+            catch (Exception e)
+            {
+                throw e;
+            }
             finally
             {
                 oracleConnection.Close();
