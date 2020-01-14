@@ -70,11 +70,6 @@ namespace ReTek_CarMechanical.Helpers
             throw new NotImplementedException();
         }
 
-        public Car GetSingleCar(Car oneCar)
-        {
-            throw new NotImplementedException();
-        }
-
         public List<Car> GetAllCar()
         {
             List<Car> allCars = new List<Car>();
@@ -110,11 +105,6 @@ namespace ReTek_CarMechanical.Helpers
                 oracleConnection.Close();
             }
             return allCars;
-        }
-
-        public Client GetSingleClient(Client client)
-        {
-            throw new NotImplementedException();
         }
 
         public List<Client> GetAllClient()
@@ -189,11 +179,6 @@ namespace ReTek_CarMechanical.Helpers
             return rowsUpdated > 0 ? true : false;
         }
 
-        public Part GetSinglePart(Part part)
-        {
-            throw new NotImplementedException();
-        }
-
         public List<Part> GetAllPart()
         {
             List<Part> allParts = new List<Part>();
@@ -210,7 +195,7 @@ namespace ReTek_CarMechanical.Helpers
                         Part onePart = new Part()
                         {
                             PartID = dr.GetInt32(0),
-                            PartName = dr. GetString(1),
+                            PartName = dr.GetString(1),
                             Price = dr.GetInt32(2),
                             Quantity = dr.GetInt32(3)
                         };
@@ -284,11 +269,6 @@ namespace ReTek_CarMechanical.Helpers
             return rowsUpdated > 0 ? true : false;
         }
 
-        public Service GetSingleService(Service service)
-        {
-            throw new NotImplementedException();
-        }
-
         public List<Service> GetAllService()
         {
             List<Service> allServices = new List<Service>();
@@ -352,11 +332,6 @@ namespace ReTek_CarMechanical.Helpers
             }
 
             return rowsUpdated > 0 ? true : false;
-        }
-
-        public Worksheet GetSingleWorksheet(Worksheet worksheet)
-        {
-            throw new NotImplementedException();
         }
 
         public List<Worksheet> GetAllWorksheet()
