@@ -11,15 +11,15 @@
             <Label Content="Keresztnév"/>
             <TextBox Text="{Binding LastName}"></TextBox>
             <Label Content="Vezetéknév"/>
-            <TextBox Text="{Binding FirstName}"></TextBox>
+            <TextBox Text="{Binding FirstName, UpdateSourceTrigger=PropertyChanged}"></TextBox>
             <Label Content="Születési Hely"/>
-            <TextBox  Text="{Binding BirthPlace}" ></TextBox>
+            <TextBox  Text="{Binding BirthPlace, UpdateSourceTrigger=PropertyChanged}" ></TextBox>
             <Label Content="Születési Dátum"/>
-            <DatePicker SelectedDate="{Binding BirthDate}" ></DatePicker>
+            <DatePicker SelectedDate="{Binding BirthDate, UpdateSourceTrigger=PropertyChanged}" ></DatePicker>
             <Label Content="TAJ szám"/>
-            <TextBox Text="{Binding SocialSecNum}" ></TextBox>
+            <TextBox Text="{Binding SocialSecNum, UpdateSourceTrigger=PropertyChanged}" ></TextBox>
             <Label Content="Adószám"/>
-            <TextBox Text="{Binding TaxNum}" ></TextBox>
+            <TextBox Text="{Binding TaxNum, UpdateSourceTrigger=PropertyChanged}" ></TextBox>
             <Button Content="Ügyfél hozzáadása a rendszerhez" Command="{Binding AddNewClientCommand}"></Button>
         </StackPanel>
     </Grid>
