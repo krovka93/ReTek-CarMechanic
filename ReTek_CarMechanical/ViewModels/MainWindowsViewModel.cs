@@ -53,6 +53,7 @@ namespace ReTek_CarMechanical.ViewModels
             ServiceView view = new ServiceView();
             view.Show();
         }
+
         private ICommand _partCommandHandler;
         public ICommand PartCommandHandler
         {

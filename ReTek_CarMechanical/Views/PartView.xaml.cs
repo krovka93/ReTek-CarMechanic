@@ -1,4 +1,5 @@
-﻿using System;
+﻿using ReTek_CarMechanical.ViewModels;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -18,11 +19,12 @@ namespace ReTek_CarMechanical.Views
     /// <summary>
     /// Interaction logic for PartView.xaml
     /// </summary>
-    public partial class PartView : Page
+    public partial class PartView : Window
     {
         public PartView()
         {
             InitializeComponent();
+            DataContext = new PartViewModel();
         }
     }
 }
