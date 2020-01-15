@@ -153,7 +153,33 @@ namespace ReTek_CarMechanical.Helpers
 
         public bool UpdateClient(Client client)
         {
-            throw new NotImplementedException();
+            int rowsUpdated = 0;
+            try
+            {
+                oracleConnection.Open();
+                OracleCommand cmd = new OracleCommand();
+                cmd.CommandText = "UPDATE CLIENTS SET FIRST_NAME=:FirstName, LAST_NAME=:LastName, BIRTH_PLACE=:BirthPlace, SOCIAL_SEC_NUM=:SocialSecNum, TAX_NUM=:TaxNum" +
+                    " WHERE CLIENT_ID=:ClientID";
+                DateTime dt = new DateTime(client.DateRegistered.Year,client.DateRegistered.Month,client.DateRegistered.Day);
+                cmd.Parameters.Add(new OracleParameter(":ClientID", client.ClientID));
+                cmd.Parameters.Add(new OracleParameter(":FirstName", client.FirstName));
+                cmd.Parameters.Add(new OracleParameter(":LastName", client.LastName));
+                cmd.Parameters.Add(new OracleParameter(":BirthPlace", client.BirthPlace));
+                cmd.Parameters.Add(new OracleParameter(":SocialSecNum", client.SocialSecNum));
+                cmd.Parameters.Add(new OracleParameter(":TaxNum", client.TaxNum));
+                cmd.Connection = oracleConnection;
+                rowsUpdated = cmd.ExecuteNonQuery();
+            }
+            catch (Exception e)
+            {
+                throw e;
+            }
+            finally
+            {
+                oracleConnection.Close();
+            }
+
+            return rowsUpdated > 0 ? true : false;
         }
 
         public bool AddClient(Client client)
@@ -165,7 +191,7 @@ namespace ReTek_CarMechanical.Helpers
                 OracleCommand cmd = new OracleCommand();
                 cmd.CommandText = "INSERT INTO CLIENTS (FIRST_NAME, LAST_NAME, BIRTH_DATE, " +
                     "BIRTH_PLACE, SOCIAL_SEC_NUM, TAX_NUM, DATE_REGISTERED)" +
-                    " VALUES (:FirstName, :LastName, :BirthDate, :BirthPlace, :SocialSecNum, :TaxNum, :DateRegistered, :PartId )";
+                    " VALUES (:FirstName, :LastName, :BirthDate, :BirthPlace, :SocialSecNum, :TaxNum, :DateRegistered )";
                 cmd.Parameters.Add(new OracleParameter(":FirstName", client.FirstName));
                 cmd.Parameters.Add(new OracleParameter(":LastName", client.LastName));
                 cmd.Parameters.Add(new OracleParameter(":BirthDate", client.BirthDate));
