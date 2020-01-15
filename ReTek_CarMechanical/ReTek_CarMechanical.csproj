@@ -86,7 +86,7 @@
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="Helpers\BussinessLayer.cs" />
+    <Compile Include="Helpers\BusinessLayer.cs" />
     <Compile Include="Helpers\CommandHandler.cs" />
     <Compile Include="Interfaces\IService.cs" />
     <Compile Include="Interfaces\IClient.cs" />

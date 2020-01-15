@@ -8,11 +8,11 @@ namespace ReTek_CarMechanical.ViewModels
 {
     class MainWindowsViewModel
     {
-        public List<Client> Clients { get { return BussinessLayer.Instance.GetAllClient(); } }
-        public List<Car> Cars { get { return BussinessLayer.Instance.GetAllCar(); } }
-        public List<Service> Services { get { return BussinessLayer.Instance.GetAllService(); } }
-        public List<Part> Parts { get { return BussinessLayer.Instance.GetAllPart(); } }
-        public List<Worksheet> Worksheets { get { return BussinessLayer.Instance.GetAllWorksheet(); } }
+        public List<Client> Clients { get { return BusinessLayer.Instance.GetAllClient(); } }
+        public List<Car> Cars { get { return BusinessLayer.Instance.GetAllCar(); } }
+        public List<Service> Services { get { return BusinessLayer.Instance.GetAllService(); } }
+        public List<Part> Parts { get { return BusinessLayer.Instance.GetAllPart(); } }
+        public List<Worksheet> Worksheets { get { return BusinessLayer.Instance.GetAllWorksheet(); } }
 
         private ICommand _clientCommandHandler;
         public ICommand ClientCommandHandler

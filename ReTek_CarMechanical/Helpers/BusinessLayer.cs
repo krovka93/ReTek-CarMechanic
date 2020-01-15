@@ -9,15 +9,15 @@ using System.Windows;
 
 namespace ReTek_CarMechanical.Helpers
 {
-    class BussinessLayer : ICar, IClient, IPart, IService, IWorksheet
+    class BusinessLayer : ICar, IClient, IPart, IService, IWorksheet
     {
         #region Private fields and Constructors
-        private static BussinessLayer instance = null;
+        private static BusinessLayer instance = null;
         private static readonly object padlock = new object();
         private static readonly string oracleDbConnectionString = "Data Source=193.225.33.71;User Id=zzhkiy;Password=szelektcsillag;";
         private static OracleConnection oracleConnection;
 
-        BussinessLayer()
+        BusinessLayer()
         {
             oracleConnection = new OracleConnection(oracleDbConnectionString);
         }
@@ -25,7 +25,7 @@ namespace ReTek_CarMechanical.Helpers
         #endregion
 
         #region Interface implementations
-        public static BussinessLayer Instance
+        public static BusinessLayer Instance
         {
             get
             {
@@ -33,7 +33,7 @@ namespace ReTek_CarMechanical.Helpers
                 {
                     if (instance == null)
                     {
-                        instance = new BussinessLayer();
+                        instance = new BusinessLayer();
                     }
                     return instance;
                 }

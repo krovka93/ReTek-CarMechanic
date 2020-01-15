@@ -66,7 +66,7 @@ namespace ReTek_CarMechanical.ViewModels
 
         public void ClientCommandHandlerAction()
         {
-           var result = BussinessLayer.Instance.AddClient(new Client() { 
+           var result = BusinessLayer.Instance.AddClient(new Client() { 
                 BirthDate = BirthDate, 
                 BirthPlace=BirthPlace, 
                 FirstName= FirstName,

@@ -10,7 +10,7 @@ namespace ReTek_CarMechanical.ViewModels
 {
     class CarViewModel : INotifyPropertyChanged
     {
-        public List<Client> Clients { get { return BussinessLayer.Instance.GetAllClient(); } }
+        public List<Client> Clients { get { return BusinessLayer.Instance.GetAllClient(); } }
 
         private Client _selectedClient;
 
@@ -64,7 +64,7 @@ namespace ReTek_CarMechanical.ViewModels
 
         private void AddNewCarCommandAction()
         {
-           var result = BussinessLayer.Instance.UploadNewCar(new Car()
+           var result = BusinessLayer.Instance.UploadNewCar(new Car()
             {
                 CarOwner = SelectedClient.ClientID,
                 CarDateofProduce = CarDateofProduce,

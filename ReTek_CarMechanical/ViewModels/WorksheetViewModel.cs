@@ -16,10 +16,10 @@ namespace ReTek_CarMechanical.ViewModels
    class WorksheetViewModel : INotifyPropertyChanged
    {
       #region properties
-      public List<Client> Clients { get { return BussinessLayer.Instance.GetAllClient(); } }
-      public List<Car> Cars { get { return BussinessLayer.Instance.GetAllCar(); } }
-      public List<Service> Services { get { return BussinessLayer.Instance.GetAllService(); } }
-      public List<Part> Parts { get { return BussinessLayer.Instance.GetAllPart(); } }
+      public List<Client> Clients { get { return BusinessLayer.Instance.GetAllClient(); } }
+      public List<Car> Cars { get { return BusinessLayer.Instance.GetAllCar(); } }
+      public List<Service> Services { get { return BusinessLayer.Instance.GetAllService(); } }
+      public List<Part> Parts { get { return BusinessLayer.Instance.GetAllPart(); } }
 
       private Client _selectedClient;
       public Client SelectedClient
@@ -78,7 +78,6 @@ namespace ReTek_CarMechanical.ViewModels
       }
       #endregion
 
-
       private ICommand _addNewWorksheetCommandHandler;
 
       public event PropertyChangedEventHandler PropertyChanged;
@@ -93,7 +92,7 @@ namespace ReTek_CarMechanical.ViewModels
 
       private void AddNewWorksheetCommandAction()
       {
-         var result = BussinessLayer.Instance.UploadWorksheet(new Worksheet()
+         var result = BusinessLayer.Instance.UploadWorksheet(new Worksheet()
          {
             CarID = SelectedCar.CarID,
             ExpectedEnd = ExpectedEnd,

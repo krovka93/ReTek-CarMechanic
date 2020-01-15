@@ -55,7 +55,7 @@ namespace ReTek_CarMechanical.ViewModels
 
         private void AddNewPartCommandAction()
         {
-            var result = BussinessLayer.Instance.AddPart(new Part()
+            var result = BusinessLayer.Instance.AddPart(new Part()
             {
                 PartName = PartName,
                 Price = PartPrice,

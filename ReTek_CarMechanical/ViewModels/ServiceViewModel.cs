@@ -46,7 +46,7 @@ namespace ReTek_CarMechanical.ViewModels
 
         private void AddNewServiceCommandAction()
         {
-            var result = BussinessLayer.Instance.AddNewService(new Service()
+            var result = BusinessLayer.Instance.AddNewService(new Service()
             {
                 ServiceName = ServiceName,
                 ServicePrice = ServicePrice,
