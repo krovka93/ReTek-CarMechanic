@@ -45,13 +45,43 @@
                 <DataGridTextColumn Width="*" Binding="{Binding DateRegistered}" Header="Regisztrálás"/>
             </DataGrid.Columns>
         </DataGrid>
-        <DataGrid  Grid.Row="2"  Margin="5"  Name="lvUsers2" ItemsSource="{Binding Cars }" AutoGenerateColumns="True">
+        <DataGrid  Grid.Row="2"  Margin="5"  Name="lvUsers2" ItemsSource="{Binding Cars }" AutoGenerateColumns="False">
+            <DataGrid.Columns>
+                <DataGridTextColumn Width="*" Binding="{Binding CarId}" Header="ID" Visibility="Hidden"/>
+                <DataGridTextColumn Width="*" Binding="{Binding CarPlateNumber}" Header="Rendszám"/>
+                <DataGridTextColumn Width="*" Binding="{Binding CarType}" Header="Típus"/>
+                <DataGridTextColumn Width="*" Binding="{Binding CarDateofProduce}" Header="Gyártási év"/>
+                <DataGridTextColumn Width="*" Binding="{Binding CarVIN}" Header="Alvázszám"/>
+                <DataGridTextColumn Width="*" Binding="{Binding CarOwner}" Header="Tulajdonos"/>
+            </DataGrid.Columns>
         </DataGrid>
-        <DataGrid  Grid.Row="3"  Margin="5" Name="lvUsers3" ItemsSource="{Binding Services}" AutoGenerateColumns="True">
+        <DataGrid  Grid.Row="3"  Margin="5" Name="lvUsers3" ItemsSource="{Binding Services}" AutoGenerateColumns="False">
+            <DataGrid.Columns>
+                <DataGridTextColumn Width="*" Binding="{Binding ServiceId}" Header="ID" Visibility="Hidden"/>
+                <DataGridTextColumn Width="*" Binding="{Binding ServiceName}" Header="Szolgáltatás"/>
+                <DataGridTextColumn Width="*" Binding="{Binding ServicePrice}" Header="Szolgáltatás ára"/>
+            </DataGrid.Columns>
         </DataGrid>
-        <DataGrid  Grid.Row="4"  Margin="5" Name="lvUsers4" ItemsSource="{Binding Parts}" AutoGenerateColumns="True">
+        <DataGrid  Grid.Row="4"  Margin="5" Name="lvUsers4" ItemsSource="{Binding Parts}" AutoGenerateColumns="False">
+            <DataGrid.Columns>
+            <DataGridTextColumn Width="*" Binding="{Binding PartId}" Header="ID" Visibility="Hidden"/>
+            <DataGridTextColumn Width="*" Binding="{Binding PartName}" Header="Alkatrész"/>
+            <DataGridTextColumn Width="*" Binding="{Binding Price}" Header="Alkatrész ára"/>
+            <DataGridTextColumn Width="*" Binding="{Binding Quantity}" Header="Mennyiség"/>
+                </DataGrid.Columns>
         </DataGrid>
-        <DataGrid  Grid.Row="5"  Margin="5" Name="lvUsers5" ItemsSource="{Binding Worksheets}" AutoGenerateColumns="True">
+        <DataGrid  Grid.Row="5"  Margin="5" Name="lvUsers5" ItemsSource="{Binding Worksheets}" AutoGenerateColumns="False">
+            <DataGrid.Columns>
+            <DataGridTextColumn Width="*" Binding="{Binding WorksheetId}" Header="ID" Visibility="Hidden"/>
+            <DataGridTextColumn Width="*" Binding="{Binding WorkStart}" Header="Kezdete"/>
+            <DataGridTextColumn Width="*" Binding="{Binding WorkActualEnd}" Header="Tényleges befejezés"/>
+            <DataGridTextColumn Width="*" Binding="{Binding ExpectedEnd}" Header="Tervezett befejezés"/>
+            <DataGridTextColumn Width="*" Binding="{Binding KilometerState}" Header="KM Állás"/>
+            <DataGridTextColumn Width="*" Binding="{Binding UniqueID}" Header="Egyedi ID" Visibility="Hidden"/>
+            <DataGridTextColumn Width="*" Binding="{Binding CarID}" Header="Autó ID" Visibility="Hidden"/>
+            <DataGridTextColumn Width="*" Binding="{Binding ServiceID}" Header="Szolgáltatás ID" Visibility="Hidden"/>
+            <DataGridTextColumn Width="*" Binding="{Binding PartID}" Header="Alkatrész ID" Visibility="Hidden"/>
+                </DataGrid.Columns>
         </DataGrid>
     </Grid>
 </Window>
