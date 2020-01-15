@@ -1,4 +1,5 @@
-﻿using System;
+﻿using ReTek_CarMechanical.ViewModels;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -22,6 +23,7 @@ namespace ReTek_CarMechanical.Views
         public WorksheetView()
         {
             InitializeComponent();
+            DataContext = new WorksheetViewModel();
         }
     }
 }

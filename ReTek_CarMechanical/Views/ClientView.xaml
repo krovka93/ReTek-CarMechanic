@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:ReTek_CarMechanical.Views"
         mc:Ignorable="d"
-        Title="Ügyfél hozzáadása" Height="400" Width="300" WindowStartupLocation="CenterOwner">
+        Title="Ügyfél hozzáadása" Height="410" Width="300" WindowStartupLocation="CenterOwner" ResizeMode="NoResize">
     <Grid>
         <StackPanel>
             <Label Content="Keresztnév"/>
@@ -20,7 +20,7 @@
          <TextBox Text="{Binding SocialSecNum, UpdateSourceTrigger=PropertyChanged}" Margin="5"></TextBox>
             <Label Content="Adószám"/>
          <TextBox Text="{Binding TaxNum, UpdateSourceTrigger=PropertyChanged}" Margin="5"></TextBox>
-         <Button Content="Ügyfél hozzáadása a rendszerhez" Command="{Binding AddNewClientCommand}" Margin="5" Height="30"></Button>
+            <Button Content="Ügyfél hozzáadása a rendszerhez" Command="{Binding AddNewClientCommandHandler}" Margin="5" Height="30"></Button>
         </StackPanel>
     </Grid>
 </Window>

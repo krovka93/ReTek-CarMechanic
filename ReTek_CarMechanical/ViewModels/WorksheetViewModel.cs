@@ -13,105 +13,114 @@ using ReTek_CarMechanical.Models;
 
 namespace ReTek_CarMechanical.ViewModels
 {
-   class WorksheetViewModel : INotifyPropertyChanged
-   {
-      #region properties
-      public List<Client> Clients { get { return BusinessLayer.Instance.GetAllClient(); } }
-      public List<Car> Cars { get { return BusinessLayer.Instance.GetAllCarByUser(SelectedClient); } }
-      public List<Service> Services { get { return BusinessLayer.Instance.GetAllService(); } }
-      public List<Part> Parts { get { return BusinessLayer.Instance.GetAllPart(); } }
+    class WorksheetViewModel : INotifyPropertyChanged
+    {
+        #region properties
+        public List<Client> Clients { get { return BusinessLayer.Instance.GetAllClient(); OnPropertyChanged("SelectedClient"); } }
+        //public List<Car> Cars { get { return SelectedClient != null ? BusinessLayer.Instance.GetAllCarByUser(SelectedClient) : null; } }
 
-      private Client _selectedClient;
-      public Client SelectedClient
-      {
-         get { return _selectedClient; }
-         set { _selectedClient = value; OnPropertyChanged("SelectedClient"); }
-      }
+        private List<Car> _cars;
 
-      private Car _selectedCar;
-      public Car SelectedCar
-      {
-         get { return _selectedCar; }
-         set { _selectedCar = value; OnPropertyChanged("SelectedCar"); }
-      }
+        public List<Car> Cars
+        {
+            get { return _cars; }
+            set { _cars = value; OnPropertyChanged("Cars"); }
+        }
 
-      private Service _selectedService;
-      public Service SelectedService
-      {
-         get { return _selectedService; }
-         set { _selectedService = value; OnPropertyChanged("SelectedService"); }
-      }
+        public List<Service> Services { get { return BusinessLayer.Instance.GetAllService(); } }
+        public List<Part> Parts { get { return BusinessLayer.Instance.GetAllPart(); } }
 
-      private Part _selectedPart;
-      public Part SelectedPart
-      {
-         get { return _selectedPart; }
-         set { _selectedPart = value; OnPropertyChanged("SelectedPart"); }
-      }
+        private Client _selectedClient;
+        public Client SelectedClient
+        {
+            get { return _selectedClient; }
+            set { _selectedClient = value; OnPropertyChanged("SelectedClient"); Cars = BusinessLayer.Instance.GetAllCarByUser(value);  }
+        }
 
-      private DateTime _workStart;
-      public DateTime WorkStart
-      {
-         get { return _workStart; }
-         set { _workStart = value; OnPropertyChanged("WorkStart"); }
-      }
+        private Car _selectedCar;
+        public Car SelectedCar
+        {
+            get { return _selectedCar; }
+            set { _selectedCar = value; OnPropertyChanged("SelectedCar"); }
+        }
 
-      private DateTime _expectedEnd;
-      public DateTime ExpectedEnd
-      {
-         get { return _expectedEnd; }
-         set { _expectedEnd = value; OnPropertyChanged("ExpectedEnd"); }
-      }
+        private Service _selectedService;
+        public Service SelectedService
+        {
+            get { return _selectedService; }
+            set { _selectedService = value; OnPropertyChanged("SelectedService"); }
+        }
 
-      private DateTime _workActualEnd;
-      public DateTime WorkActualEnd
-      {
-         get { return _workActualEnd; }
-         set { _workActualEnd = value; OnPropertyChanged("WorkActualEnd"); }
-      }
+        private Part _selectedPart;
+        public Part SelectedPart
+        {
+            get { return _selectedPart; }
+            set { _selectedPart = value; OnPropertyChanged("SelectedPart"); }
+        }
 
-      private int _kilometerState;
-      public int KilometerState
-      {
-         get { return _kilometerState; }
-         set { _kilometerState = value; OnPropertyChanged("KilometerState"); }
-      }
-      #endregion
+        private DateTime _workStart;
+        public DateTime WorkStart
+        {
+            get { return _workStart; }
+            set { _workStart = value; OnPropertyChanged("WorkStart"); }
+        }
 
-      private ICommand _addNewWorksheetCommandHandler;
+        private DateTime _expectedEnd;
+        public DateTime ExpectedEnd
+        {
+            get { return _expectedEnd; }
+            set { _expectedEnd = value; OnPropertyChanged("ExpectedEnd"); }
+        }
 
-      public event PropertyChangedEventHandler PropertyChanged;
+        private DateTime _workActualEnd;
+        public DateTime WorkActualEnd
+        {
+            get { return _workActualEnd; }
+            set { _workActualEnd = value; OnPropertyChanged("WorkActualEnd"); }
+        }
 
-      public ICommand AddNewServiceCommandHandler
-      {
-         get
-         {
-            return _addNewWorksheetCommandHandler ?? (_addNewWorksheetCommandHandler = new CommandHandler(() => AddNewWorksheetCommandAction(), () => true));
-         }
-      }
+        private int _kilometerState;
+        public int KilometerState
+        {
+            get { return _kilometerState; }
+            set { _kilometerState = value; OnPropertyChanged("KilometerState"); }
+        }
+        #endregion
 
-      private void AddNewWorksheetCommandAction()
-      {
-         var result = BusinessLayer.Instance.UploadWorksheet(new Worksheet()
-         {
-            CarID = SelectedCar.CarID,
-            ExpectedEnd = ExpectedEnd,
-            KilometerState = KilometerState,
-            PartID = SelectedPart.PartID,
-            ServiceID = SelectedService.ServiceID,
-            UniqueId = "DB_Will_Create_It",
-            WorkActualEnd = WorkActualEnd,
-            WorkStart = WorkStart,
-         });
+        private ICommand _addNewWorksheetCommandHandler;
 
-         MessageBox.Show(result ? "Sikeres hozzáadás" : "SIKERTELEN hozzáadás", "Szolgáltatás hozzáadása", MessageBoxButton.OK,MessageBoxImage.Information);
-      }
+        public event PropertyChangedEventHandler PropertyChanged;
+
+        public ICommand AddNewWorksheetCommandHandler
+        {
+            get
+            {
+                return _addNewWorksheetCommandHandler ?? (_addNewWorksheetCommandHandler = new CommandHandler(() => AddNewWorksheetCommandAction(), () => true));
+            }
+        }
+
+        private void AddNewWorksheetCommandAction()
+        {
+            var result = BusinessLayer.Instance.UploadWorksheet(new Worksheet()
+            {
+                CarID = SelectedCar.CarID,
+                ExpectedEnd = ExpectedEnd,
+                KilometerState = KilometerState,
+                PartID = SelectedPart.PartID,
+                ServiceID = SelectedService.ServiceID,
+                UniqueId = "DB_Will_Create_It",
+                WorkActualEnd = WorkActualEnd,
+                WorkStart = WorkStart,
+            });
+
+            MessageBox.Show(result ? "Sikeres hozzáadás" : "SIKERTELEN hozzáadás", "Szolgáltatás hozzáadása", MessageBoxButton.OK, MessageBoxImage.Information);
+        }
 
 
-      protected virtual void OnPropertyChanged([CallerMemberName] string propertyName = null)
-      {
-         PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
+        protected virtual void OnPropertyChanged([CallerMemberName] string propertyName = null)
+        {
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
 
-      }
-   }
+        }
+    }
 }

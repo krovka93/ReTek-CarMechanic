@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:ReTek_CarMechanical.Views"
         mc:Ignorable="d"
-        Title="Munkalap generálása" Height="620" Width="400" WindowStartupLocation="CenterOwner">
+        Title="Munkalap generálása" Height="630" Width="400" WindowStartupLocation="CenterOwner" ResizeMode="NoResize">
    <Grid>
       <StackPanel>
          <Label Margin="5" Content="Válassza ki a gépjármű tulajdonosát" ></Label>
@@ -77,7 +77,7 @@
                </DataTemplate>
             </ComboBox.ItemTemplate>
          </ComboBox>
-         <Button Height="30" Margin="5" Content="Munkalap felvétele" Command="{Binding AddNewCarCommandHandler}"></Button>
+            <Button Height="30" Margin="5" Content="Munkalap felvétele" Command="{Binding AddNewWorksheetCommandHandler}"></Button>
       </StackPanel>
    </Grid>
 

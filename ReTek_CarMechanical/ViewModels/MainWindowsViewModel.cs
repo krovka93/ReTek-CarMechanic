@@ -1,18 +1,30 @@
 ﻿using ReTek_CarMechanical.Helpers;
 using ReTek_CarMechanical.Models;
 using ReTek_CarMechanical.Views;
+using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Windows.Input;
 
 namespace ReTek_CarMechanical.ViewModels
 {
-    class MainWindowsViewModel
+    class MainWindowsViewModel : INotifyPropertyChanged
     {
-        public List<Client> Clients { get { return BusinessLayer.Instance.GetAllClient(); } }
-        public List<Car> Cars { get { return BusinessLayer.Instance.GetAllCar(); } }
-        public List<Service> Services { get { return BusinessLayer.Instance.GetAllService(); } }
-        public List<Part> Parts { get { return BusinessLayer.Instance.GetAllPart(); } }
-        public List<Worksheet> Worksheets { get { return BusinessLayer.Instance.GetAllWorksheet(); } }
+        public MainWindowsViewModel()
+        {
+            Clients = BusinessLayer.Instance.GetAllClient();
+            Cars = BusinessLayer.Instance.GetAllCar();
+            Services = BusinessLayer.Instance.GetAllService();
+            Parts = BusinessLayer.Instance.GetAllPart();
+            Worksheets = BusinessLayer.Instance.GetAllWorksheet();
+
+        }
+        public List<Client> Clients { get; set; }
+
+        public List<Car> Cars { get; set; }
+        public List<Service> Services { get; set; }
+        public List<Part> Parts { get; set; }
+        public List<Worksheet> Worksheets { get; set; }
 
         private ICommand _clientCommandHandler;
         public ICommand ClientCommandHandler
@@ -71,6 +83,55 @@ namespace ReTek_CarMechanical.ViewModels
         {
             PartView view = new PartView();
             view.Show();
+        }
+
+        private ICommand _worksheetCommandHandler;
+        public ICommand WorksheetCommandHandler
+        {
+            get
+            {
+                return _worksheetCommandHandler ?? (_worksheetCommandHandler = new CommandHandler(() => WorksheetCommandHandlerAction(), () => true));
+            }
+        }
+
+        public void WorksheetCommandHandlerAction()
+        {
+            WorksheetView view = new WorksheetView();
+            view.Show();
+        }
+        public event PropertyChangedEventHandler PropertyChanged;
+
+        private ICommand _updateDataGridsCommandHandler;
+
+        public ICommand UpdateDataGridsCommandHandler
+        {
+            get
+            {
+                return _updateDataGridsCommandHandler ?? (_updateDataGridsCommandHandler = new CommandHandler(() => UpdateGridsCommandHandlerAction(), () => true));
+            }
+        }
+
+        private void UpdateGridsCommandHandlerAction()
+        {
+            Clients = BusinessLayer.Instance.GetAllClient();
+            Cars = BusinessLayer.Instance.GetAllCar();
+            Services = BusinessLayer.Instance.GetAllService();
+            Parts = BusinessLayer.Instance.GetAllPart();
+            Worksheets = BusinessLayer.Instance.GetAllWorksheet();
+            OnPropertyChanged(nameof(Clients));
+            OnPropertyChanged(nameof(Cars));
+            OnPropertyChanged(nameof(Services));
+            OnPropertyChanged(nameof(Parts));
+            OnPropertyChanged(nameof(Worksheets));
+        }
+
+        protected void OnPropertyChanged(string name)
+        {
+            PropertyChangedEventHandler handler = PropertyChanged;
+            if (handler != null)
+            {
+                handler(this, new PropertyChangedEventArgs(name));
+            }
         }
     }
 }

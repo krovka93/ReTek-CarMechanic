@@ -348,21 +348,21 @@ namespace ReTek_CarMechanical.Helpers
             {
                 oracleConnection.Open();
                 OracleCommand cmd = new OracleCommand();
-                cmd.CommandText = "INSERT INTO WORKSHEET (START_DATE, EXPECTED_END, ACTUAL_END, KILOMETER_STATE, " +
+                cmd.Connection = oracleConnection;
+                cmd.CommandText = "INSERT INTO WORKSHEETS (START_DATE, EXPECTED_END, ACTUAL_END, KILOMETER_STATE, " +
                     "UNIQUE_ID, CAR_ID, SERVICE_ID, PART_ID)" +
                     " VALUES (:StartDate, :ExpectedEnd, :ActualEnd, :KilometerState, :UniqueId, :CarId, :ServiceId, :PartId )";
-                cmd.Parameters.Add(new OracleParameter(":Worksheet", worksheet.WorkStart));
                 cmd.Parameters.Add(new OracleParameter(":StartDate", worksheet.WorkStart));
                 cmd.Parameters.Add(new OracleParameter(":ExpectedEnd", worksheet.ExpectedEnd));
                 cmd.Parameters.Add(new OracleParameter(":ActualEnd", worksheet.WorkActualEnd));
                 cmd.Parameters.Add(new OracleParameter(":KilometerState", worksheet.KilometerState));
-                cmd.Parameters.Add(new OracleParameter(":UniqueId", "TESTUNIQUEID"));
+                cmd.Parameters.Add(new OracleParameter(":UniqueId", "TESTUNIQUEID"+DateTime.Now));
                 cmd.Parameters.Add(new OracleParameter(":CarId", worksheet.CarID));
                 cmd.Parameters.Add(new OracleParameter(":ServiceId", worksheet.ServiceID));
                 cmd.Parameters.Add(new OracleParameter(":PartId", worksheet.PartID));
                 rowsUpdated = cmd.ExecuteNonQuery();
             }
-            catch (Exception) { }
+            catch (Exception ex) { }
             finally
             {
                 oracleConnection.Close();
@@ -439,9 +439,8 @@ namespace ReTek_CarMechanical.Helpers
                     }
                 }
             }
-            catch (Exception e)
+            catch (Exception )
             {
-                throw e;
             }
             finally
             {
