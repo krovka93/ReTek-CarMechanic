@@ -160,7 +160,6 @@ namespace ReTek_CarMechanical.Helpers
                 OracleCommand cmd = new OracleCommand();
                 cmd.CommandText = "UPDATE CLIENTS SET FIRST_NAME=:FirstName, LAST_NAME=:LastName, BIRTH_PLACE=:BirthPlace, SOCIAL_SEC_NUM=:SocialSecNum, TAX_NUM=:TaxNum" +
                     " WHERE CLIENT_ID=:ClientID";
-                DateTime dt = new DateTime(client.DateRegistered.Year,client.DateRegistered.Month,client.DateRegistered.Day);
                 cmd.Parameters.Add(new OracleParameter(":ClientID", client.ClientID));
                 cmd.Parameters.Add(new OracleParameter(":FirstName", client.FirstName));
                 cmd.Parameters.Add(new OracleParameter(":LastName", client.LastName));
@@ -272,12 +271,57 @@ namespace ReTek_CarMechanical.Helpers
 
         public bool UpdatePart(Part part)
         {
-            throw new NotImplementedException();
+            int rowsUpdated = 0;
+            try
+            {
+                oracleConnection.Open();
+                OracleCommand cmd = new OracleCommand();
+                cmd.CommandText = "UPDATE PARTS SET PART_NAME=:PartName, PRICE=:Price, QUANTITY=:Quantity" +
+                    " WHERE PART_ID=:PartID";
+                cmd.Parameters.Add(new OracleParameter(":PartName", part.PartName));
+                cmd.Parameters.Add(new OracleParameter(":Price", part.Price));
+                cmd.Parameters.Add(new OracleParameter(":Quantity", part.Quantity));
+                cmd.Parameters.Add(new OracleParameter(":PartID", part.PartID));
+                cmd.Connection = oracleConnection;
+                rowsUpdated = cmd.ExecuteNonQuery();
+            }
+            catch (Exception e)
+            {
+                throw e;
+            }
+            finally
+            {
+                oracleConnection.Close();
+            }
+
+            return rowsUpdated > 0 ? true : false;
         }
 
         public bool UpdateService(Service service)
         {
-            throw new NotImplementedException();
+            int rowsUpdated = 0;
+            try
+            {
+                oracleConnection.Open();
+                OracleCommand cmd = new OracleCommand();
+                cmd.CommandText = "UPDATE PARTS SET SERVICE_NAME=:ServiceName, SERVICE_PRICE=:ServicePrice" +
+                    " WHERE SERVICE_ID=:ServiceID";
+                cmd.Parameters.Add(new OracleParameter(":ServiceName", service.ServiceName));
+                cmd.Parameters.Add(new OracleParameter(":ServicePrice", service.ServicePrice));
+                cmd.Parameters.Add(new OracleParameter(":ServiceID", service.ServiceID));
+                cmd.Connection = oracleConnection;
+                rowsUpdated = cmd.ExecuteNonQuery();
+            }
+            catch (Exception e)
+            {
+                throw e;
+            }
+            finally
+            {
+                oracleConnection.Close();
+            }
+
+            return rowsUpdated > 0 ? true : false;
         }
 
         public bool AddNewService(Service service)
