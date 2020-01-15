@@ -6,22 +6,20 @@
       xmlns:local="clr-namespace:ReTek_CarMechanical.Views"
       mc:Ignorable="d" 
       d:DesignHeight="450" d:DesignWidth="800"
-      Title="PartView">
-
-    <Grid>
+      Title="Alkatrész hozzáadása" Height="230" Width="300" WindowStartupLocation="CenterOwner">
+   <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="0*"/>
             <ColumnDefinition/>
         </Grid.ColumnDefinitions>
-        <StackPanel Grid.ColumnSpan="2" Margin="0,0,-0.4,0">
-            <Label Content="Válassza ki a kívánt alkatrészeket!"></Label>
+        <StackPanel Grid.ColumnSpan="2">
             <Label Content="Alkatrész neve"></Label>
-            <TextBox Text="{Binding PartName,UpdateSourceTrigger=PropertyChanged}"></TextBox>
+            <TextBox Text="{Binding PartName,UpdateSourceTrigger=PropertyChanged}" Margin="5"></TextBox>
             <Label Content="Alketrész ára"></Label>
-            <TextBox Text="{Binding PartPrice,UpdateSourceTrigger=PropertyChanged}"></TextBox>
+         <TextBox Text="{Binding PartPrice,UpdateSourceTrigger=PropertyChanged}" Margin="5"></TextBox>
             <Label Content="Készlet"></Label>
-            <TextBox Text="{Binding PartQuantity,UpdateSourceTrigger=PropertyChanged}"></TextBox>
-            <Button Content="Alkatrészek regisztrálása" Command="{Binding AddNewPartCommandHandler}"></Button>
+         <TextBox Text="{Binding PartQuantity,UpdateSourceTrigger=PropertyChanged}"  Margin="5"></TextBox>
+         <Button Content="Alkatrészek regisztrálása" Command="{Binding AddNewPartCommandHandler}"  Margin="5"></Button>
         </StackPanel>
     </Grid>
 </Window>

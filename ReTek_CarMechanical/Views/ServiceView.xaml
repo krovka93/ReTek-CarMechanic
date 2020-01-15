@@ -5,15 +5,14 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:ReTek_CarMechanical.Views"
         mc:Ignorable="d"
-        Title="ServiceView" Height="210" Width="300">
+        Title="Szolgáltatás hozzáadása" Height="200" Width="300" WindowStartupLocation="CenterOwner">
    <Grid>
       <StackPanel>
-         <Label Content="Válassza ki a kívánt szolgáltatást"></Label>
-         <Label Content="Szolgáltatás" ></Label>
-            <TextBox Text="{Binding ServiceName, UpdateSourceTrigger=PropertyChanged}" Margin="0,0,0,10"></TextBox>
-         <Label Content="Szolgtatás ára"></Label>
-            <TextBox Text="{Binding ServicePrice, UpdateSourceTrigger=PropertyChanged}" Margin="0,0,0,10"></TextBox>
-         <Button Content="Szolgáltatás hozzáadása" Command="{Binding AddNewServiceCommandHandler}" Margin="0,10,0,10"></Button>
+         <Label Content="Szolgáltatás neve" ></Label>
+            <TextBox Text="{Binding ServiceName, UpdateSourceTrigger=PropertyChanged}" Margin="10"></TextBox>
+         <Label Content="Szolgtatás ára (forintban értendő)"></Label>
+         <TextBox Text="{Binding ServicePrice, UpdateSourceTrigger=PropertyChanged}" Margin="10"></TextBox>
+         <Button Content="Szolgáltatás hozzáadása" Command="{Binding AddNewServiceCommandHandler}" Margin="10"></Button>
       </StackPanel>
    </Grid>
 

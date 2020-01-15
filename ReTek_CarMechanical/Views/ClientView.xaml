@@ -5,22 +5,22 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:ReTek_CarMechanical.Views"
         mc:Ignorable="d"
-        Title="ClientView" Height="450" Width="800">
+        Title="Ügyfél hozzáadása" Height="400" Width="300" WindowStartupLocation="CenterOwner">
     <Grid>
         <StackPanel>
             <Label Content="Keresztnév"/>
-            <TextBox Text="{Binding LastName}"></TextBox>
+            <TextBox Text="{Binding LastName}" Margin="5"></TextBox>
             <Label Content="Vezetéknév"/>
-            <TextBox Text="{Binding FirstName, UpdateSourceTrigger=PropertyChanged}"></TextBox>
+         <TextBox Text="{Binding FirstName, UpdateSourceTrigger=PropertyChanged}" Margin="5"></TextBox>
             <Label Content="Születési Hely"/>
-            <TextBox  Text="{Binding BirthPlace, UpdateSourceTrigger=PropertyChanged}" ></TextBox>
+         <TextBox  Text="{Binding BirthPlace, UpdateSourceTrigger=PropertyChanged}" Margin="5" ></TextBox>
             <Label Content="Születési Dátum"/>
-            <DatePicker SelectedDate="{Binding BirthDate, UpdateSourceTrigger=PropertyChanged}" ></DatePicker>
+         <DatePicker SelectedDate="{Binding BirthDate, UpdateSourceTrigger=PropertyChanged}" Margin="5"></DatePicker>
             <Label Content="TAJ szám"/>
-            <TextBox Text="{Binding SocialSecNum, UpdateSourceTrigger=PropertyChanged}" ></TextBox>
+         <TextBox Text="{Binding SocialSecNum, UpdateSourceTrigger=PropertyChanged}" Margin="5"></TextBox>
             <Label Content="Adószám"/>
-            <TextBox Text="{Binding TaxNum, UpdateSourceTrigger=PropertyChanged}" ></TextBox>
-            <Button Content="Ügyfél hozzáadása a rendszerhez" Command="{Binding AddNewClientCommand}"></Button>
+         <TextBox Text="{Binding TaxNum, UpdateSourceTrigger=PropertyChanged}" Margin="5"></TextBox>
+         <Button Content="Ügyfél hozzáadása a rendszerhez" Command="{Binding AddNewClientCommand}" Margin="5"></Button>
         </StackPanel>
     </Grid>
 </Window>
