@@ -281,6 +281,7 @@ namespace ReTek_CarMechanical.Helpers
                 cmd.Parameters.Add(new OracleParameter(":PartName", part.PartName));
                 cmd.Parameters.Add(new OracleParameter(":Price", part.Price));
                 cmd.Parameters.Add(new OracleParameter(":Quantity", part.Quantity));
+                cmd.Parameters.Add(new OracleParameter(":PartID", part.PartID));
                 cmd.Connection = oracleConnection;
                 rowsUpdated = cmd.ExecuteNonQuery();
             }
@@ -298,7 +299,29 @@ namespace ReTek_CarMechanical.Helpers
 
         public bool UpdateService(Service service)
         {
-            throw new NotImplementedException();
+            int rowsUpdated = 0;
+            try
+            {
+                oracleConnection.Open();
+                OracleCommand cmd = new OracleCommand();
+                cmd.CommandText = "UPDATE PARTS SET SERVICE_NAME=:ServiceName, SERVICE_PRICE=:ServicePrice" +
+                    " WHERE SERVICE_ID=:ServiceID";
+                cmd.Parameters.Add(new OracleParameter(":ServiceName", service.ServiceName));
+                cmd.Parameters.Add(new OracleParameter(":ServicePrice", service.ServicePrice));
+                cmd.Parameters.Add(new OracleParameter(":ServiceID", service.ServiceID));
+                cmd.Connection = oracleConnection;
+                rowsUpdated = cmd.ExecuteNonQuery();
+            }
+            catch (Exception e)
+            {
+                throw e;
+            }
+            finally
+            {
+                oracleConnection.Close();
+            }
+
+            return rowsUpdated > 0 ? true : false;
         }
 
         public bool AddNewService(Service service)
