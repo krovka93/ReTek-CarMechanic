@@ -12,7 +12,7 @@
             <TextBox Text="{Binding ServiceName, UpdateSourceTrigger=PropertyChanged}" Margin="10"></TextBox>
          <Label Content="Szolgtatás ára (forintban értendő)"></Label>
          <TextBox Text="{Binding ServicePrice, UpdateSourceTrigger=PropertyChanged}" Margin="10"></TextBox>
-         <Button Content="Szolgáltatás hozzáadása" Command="{Binding AddNewServiceCommandHandler}" Margin="10"></Button>
+         <Button Content="Szolgáltatás hozzáadása" Command="{Binding AddNewServiceCommandHandler}" Margin="5" Height="30"></Button>
       </StackPanel>
    </Grid>
 

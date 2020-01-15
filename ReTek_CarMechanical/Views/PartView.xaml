@@ -19,7 +19,7 @@
          <TextBox Text="{Binding PartPrice,UpdateSourceTrigger=PropertyChanged}" Margin="5"></TextBox>
             <Label Content="Készlet"></Label>
          <TextBox Text="{Binding PartQuantity,UpdateSourceTrigger=PropertyChanged}"  Margin="5"></TextBox>
-         <Button Content="Alkatrészek regisztrálása" Command="{Binding AddNewPartCommandHandler}"  Margin="5"></Button>
+         <Button Content="Alkatrészek regisztrálása" Command="{Binding AddNewPartCommandHandler}"  Margin="5" Height="30"></Button>
         </StackPanel>
     </Grid>
 </Window>

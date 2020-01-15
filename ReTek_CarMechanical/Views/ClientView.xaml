@@ -20,7 +20,7 @@
          <TextBox Text="{Binding SocialSecNum, UpdateSourceTrigger=PropertyChanged}" Margin="5"></TextBox>
             <Label Content="Adószám"/>
          <TextBox Text="{Binding TaxNum, UpdateSourceTrigger=PropertyChanged}" Margin="5"></TextBox>
-         <Button Content="Ügyfél hozzáadása a rendszerhez" Command="{Binding AddNewClientCommand}" Margin="5"></Button>
+         <Button Content="Ügyfél hozzáadása a rendszerhez" Command="{Binding AddNewClientCommand}" Margin="5" Height="30"></Button>
         </StackPanel>
     </Grid>
 </Window>
