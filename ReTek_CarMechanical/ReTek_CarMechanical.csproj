@@ -60,11 +60,15 @@
     </ApplicationDefinition>
     <Compile Include="ViewModels\PartViewModel.cs" />
     <Compile Include="ViewModels\ServiceViewModel.cs" />
+    <Compile Include="ViewModels\WorksheetViewModel.cs" />
     <Compile Include="Views\PartView.xaml.cs">
       <DependentUpon>PartView.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\ServiceView.xaml.cs">
       <DependentUpon>ServiceView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\WorksheetView.xaml.cs">
+      <DependentUpon>WorksheetView.xaml</DependentUpon>
     </Compile>
     <Page Include="Views\CarView.xaml">
       <SubType>Designer</SubType>
@@ -114,6 +118,10 @@
     <Page Include="Views\ServiceView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\WorksheetView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
     </Page>
   </ItemGroup>
   <ItemGroup>

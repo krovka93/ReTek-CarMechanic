@@ -5,25 +5,80 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:ReTek_CarMechanical.Views"
         mc:Ignorable="d"
-        Title="WorksheetView" Height="450" Width="800">
-    <Grid>
-        <StackPanel>
-            <Label Content="Válassza ki a gépjármű tulajdonosát"></Label>
-            <ComboBox ItemsSource="{Binding Clients.FirstName}" SelectedItem="{Binding SelectedClient, UpdateSourceTrigger=PropertyChanged}"/>
+        Title="Munkalap generálása" Height="620" Width="400" WindowStartupLocation="CenterOwner">
+   <Grid>
+      <StackPanel>
+         <Label Margin="5" Content="Válassza ki a gépjármű tulajdonosát" ></Label>
+         <ComboBox Margin="5" ItemsSource="{Binding Clients}" SelectedItem="{Binding SelectedClient, UpdateSourceTrigger=PropertyChanged}">
+            <ComboBox.ItemTemplate>
+               <DataTemplate>
+                  <TextBlock>
+                     <TextBlock.Text>
+                        <MultiBinding StringFormat="{}{0} {1}">
+                           <Binding Path="LastName" />
+                           <Binding Path="FirstName" />
+                        </MultiBinding>
+                     </TextBlock.Text>
+                  </TextBlock>
+               </DataTemplate>
+            </ComboBox.ItemTemplate>
+         </ComboBox>
+         <Label Margin="5" Content="Válassza ki a gépjárművet"></Label>
+         <ComboBox  Margin="5" ItemsSource="{Binding Cars}" SelectedItem="{Binding SelectedCar, UpdateSourceTrigger=PropertyChanged}">
+            <ComboBox.ItemTemplate>
+               <DataTemplate>
+                  <TextBlock>
+                     <TextBlock.Text>
+                        <MultiBinding StringFormat="{}{0} - {1}">
+                           <Binding Path="CarPlateNumber" />
+                           <Binding Path="CarVIN" />
+                        </MultiBinding>
+                     </TextBlock.Text>
+                  </TextBlock>
+               </DataTemplate>
+            </ComboBox.ItemTemplate>
+         </ComboBox>
+         <Label Margin="5" Content="Munka kezdetének ideje"/>
+         <DatePicker Margin="5" SelectedDate="{Binding WorkStart, UpdateSourceTrigger=PropertyChanged}" ></DatePicker>
+         <Label Margin="5" Content="Munka várható befejezésének ideje"/>
+         <DatePicker Margin="5" SelectedDate="{Binding ExpectedEnd, UpdateSourceTrigger=PropertyChanged}" ></DatePicker>
+         <Label Margin="5" Content="Munka tényleges befejezésének ideje"/>
+         <DatePicker Margin="5" SelectedDate="{Binding WorkActualEnd, UpdateSourceTrigger=PropertyChanged}" ></DatePicker>
+         <Label Margin="5" Content="Gépjármű aktuális KM óra állása"/>
+         <TextBox Margin="5" Text="{Binding KilometerState}"></TextBox>
+         <Label Margin="5" Content="Válassza ki az elvégzendő szolgáltatást"></Label>
+         <ComboBox Margin="5" ItemsSource="{Binding Services}" SelectedItem="{Binding SelectedService, UpdateSourceTrigger=PropertyChanged}">
+            <ComboBox.ItemTemplate>
+               <DataTemplate>
+                  <TextBlock>
+                     <TextBlock.Text>
+                        <MultiBinding StringFormat="{}{0} szolgáltatás Ára: {1}FT">
+                           <Binding Path="ServiceName" />
+                           <Binding Path="ServicePrice" />
+                        </MultiBinding>
+                     </TextBlock.Text>
+                  </TextBlock>
+               </DataTemplate>
+            </ComboBox.ItemTemplate>
+         </ComboBox>
+         <Label Margin="5" Content="Válassza ki az igényelt alkatrészt"></Label>
+         <ComboBox  Margin="5" ItemsSource="{Binding Parts}" SelectedItem="{Binding SelectedPart, UpdateSourceTrigger=PropertyChanged}">
+            <ComboBox.ItemTemplate>
+               <DataTemplate>
+                  <TextBlock>
+                     <TextBlock.Text>
+                        <MultiBinding StringFormat="{}{0} nevű alkatrész Ára: {1}FT || Készleten: {2} darab">
+                           <Binding Path="PartName" />
+                           <Binding Path="Price" />
+                           <Binding Path="Quantity" />
+                        </MultiBinding>
+                     </TextBlock.Text>
+                  </TextBlock>
+               </DataTemplate>
+            </ComboBox.ItemTemplate>
+         </ComboBox>
+         <Button Height="30" Margin="5" Content="Munkalap felvétele" Command="{Binding AddNewCarCommandHandler}"></Button>
+      </StackPanel>
+   </Grid>
 
-            <Label Content="Válassza ki a gépjárművet"></Label>
-            <ComboBox ItemsSource="{Binding Clients.FirstName}" SelectedItem="{Binding SelectedClient, UpdateSourceTrigger=PropertyChanged}"/>
-
-
-            <Label Content="Munka kezdetének ideje"/>
-            <DatePicker SelectedDate="{Binding BirthDate, UpdateSourceTrigger=PropertyChanged}" ></DatePicker>
-            <Label Content="Munka várható befejezésének ideje"/>
-            <DatePicker SelectedDate="{Binding BirthDate, UpdateSourceTrigger=PropertyChanged}" ></DatePicker>
-            <Label Content="Munka befejezésének ideje"/>
-            <DatePicker SelectedDate="{Binding BirthDate, UpdateSourceTrigger=PropertyChanged}" ></DatePicker>
-            <Label Content="Gépjármű aktuális KM óra állása"/>
-            <TextBox Text="{Binding LastName}"></TextBox>
-
-        </StackPanel>
-    </Grid>
 </Window>

@@ -74,10 +74,10 @@ namespace ReTek_CarMechanical.ViewModels
                 SocialSecNum = SocialSecNum,
                 TaxNum = TaxNum });
 
-           MessageBox.Show(result ? "Sikeres hozzáadás" : "SIKERTELEN hozzáadás", "Ügyfél hozzáadása");
+           MessageBox.Show(result ? "Sikeres hozzáadás" : "SIKERTELEN hozzáadás", "Szolgáltatás hozzáadása", MessageBoxButton.OK, MessageBoxImage.Information);
         }
 
-        protected void OnPropertyChanged(string name)
+      protected void OnPropertyChanged(string name)
         {
             PropertyChangedEventHandler handler = PropertyChanged;
             if (handler != null)

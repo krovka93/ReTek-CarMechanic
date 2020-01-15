@@ -73,11 +73,10 @@ namespace ReTek_CarMechanical.ViewModels
                 CarVIN = CarVIN
             });
 
-
-           MessageBox.Show(result ? "Sikeres hozzáadás" : "SIKERTELEN hozzáadás", "Gépjármű hozzáadása");
+           MessageBox.Show(result ? "Sikeres hozzáadás" : "SIKERTELEN hozzáadás", "Szolgáltatás hozzáadása", MessageBoxButton.OK, MessageBoxImage.Information);
         }
 
-        protected void OnPropertyChanged(string name)
+      protected void OnPropertyChanged(string name)
         {
             PropertyChangedEventHandler handler = PropertyChanged;
             if (handler != null)
