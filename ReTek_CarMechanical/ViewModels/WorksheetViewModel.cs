@@ -17,7 +17,7 @@ namespace ReTek_CarMechanical.ViewModels
    {
       #region properties
       public List<Client> Clients { get { return BusinessLayer.Instance.GetAllClient(); } }
-      public List<Car> Cars { get { return BusinessLayer.Instance.GetAllCar(); } }
+      public List<Car> Cars { get { return BusinessLayer.Instance.GetAllCarByUser(SelectedClient); } }
       public List<Service> Services { get { return BusinessLayer.Instance.GetAllService(); } }
       public List<Part> Parts { get { return BusinessLayer.Instance.GetAllPart(); } }
 
