@@ -20,7 +20,6 @@ namespace ReTek_CarMechanical.ViewModels
 
         }
         public List<Client> Clients { get; set; }
-
         public List<Car> Cars { get; set; }
         public List<Service> Services { get; set; }
         public List<Part> Parts { get; set; }
