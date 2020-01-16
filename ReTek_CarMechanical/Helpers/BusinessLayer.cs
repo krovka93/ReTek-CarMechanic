@@ -103,7 +103,6 @@ namespace ReTek_CarMechanical.Helpers
         public List<Car> GetAllCar()
         {
             List<Car> allCars = new List<Car>();
-            oracleConnection = new OracleConnection(oracleDbConnectionString);
             try
             {
                 oracleConnection.Open();
@@ -140,7 +139,6 @@ namespace ReTek_CarMechanical.Helpers
         public List<Client> GetAllClient()
         {
             List<Client> allClients = new List<Client>();
-            oracleConnection = new OracleConnection(oracleDbConnectionString);
             try
             {
                 oracleConnection.Open();
@@ -183,11 +181,12 @@ namespace ReTek_CarMechanical.Helpers
             {
                 oracleConnection.Open();
                 OracleCommand cmd = new OracleCommand();
-                cmd.CommandText = "UPDATE CLIENTS SET FIRST_NAME=:FirstName, LAST_NAME=:LastName, BIRTH_PLACE=:BirthPlace, SOCIAL_SEC_NUM=:SocialSecNum, TAX_NUM=:TaxNum" +
+                cmd.CommandText = "UPDATE CLIENTS SET FIRST_NAME=:FirstName, LAST_NAME=:LastName, BIRTH_DATE=:BirthDate, BIRTH_PLACE=:BirthPlace, SOCIAL_SEC_NUM=:SocialSecNum, TAX_NUM=:TaxNum" +
                     " WHERE CLIENT_ID=:ClientID";
                 cmd.Parameters.Add(new OracleParameter(":ClientID", client.ClientID));
                 cmd.Parameters.Add(new OracleParameter(":FirstName", client.FirstName));
                 cmd.Parameters.Add(new OracleParameter(":LastName", client.LastName));
+                cmd.Parameters.Add(new OracleParameter(":BirthDate", client.BirthDate));
                 cmd.Parameters.Add(new OracleParameter(":BirthPlace", client.BirthPlace));
                 cmd.Parameters.Add(new OracleParameter(":SocialSecNum", client.SocialSecNum));
                 cmd.Parameters.Add(new OracleParameter(":TaxNum", client.TaxNum));
@@ -378,7 +377,6 @@ namespace ReTek_CarMechanical.Helpers
         public List<Service> GetAllService()
         {
             List<Service> allServices = new List<Service>();
-            oracleConnection = new OracleConnection(oracleDbConnectionString);
             try
             {
                 oracleConnection.Open();
@@ -443,7 +441,6 @@ namespace ReTek_CarMechanical.Helpers
         public List<Worksheet> GetAllWorksheet()
         {
             List<Worksheet> allWorksheets = new List<Worksheet>();
-            oracleConnection = new OracleConnection(oracleDbConnectionString);
             try
             {
                 oracleConnection.Open();
@@ -483,7 +480,6 @@ namespace ReTek_CarMechanical.Helpers
         public List<Car> GetAllCarByUser(Client selectedClient)
         {
             List<Car> allCars = new List<Car>();
-            oracleConnection = new OracleConnection(oracleDbConnectionString);
             try
             {
                 oracleConnection.Open();
