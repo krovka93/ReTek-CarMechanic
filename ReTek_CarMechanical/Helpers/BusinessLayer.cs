@@ -329,7 +329,7 @@ namespace ReTek_CarMechanical.Helpers
             {
                 oracleConnection.Open();
                 OracleCommand cmd = new OracleCommand();
-                cmd.CommandText = "UPDATE PARTS SET SERVICE_NAME=:ServiceName, SERVICE_PRICE=:ServicePrice" +
+                cmd.CommandText = "UPDATE SERVICES SET SERVICE_NAME=:ServiceName, PRICE=:ServicePrice" +
                     " WHERE SERVICE_ID=:ServiceID";
                 cmd.Parameters.Add(new OracleParameter(":ServiceName", service.ServiceName));
                 cmd.Parameters.Add(new OracleParameter(":ServicePrice", service.ServicePrice));
