@@ -51,5 +51,13 @@ namespace ReTek_CarMechanical.Helpers.Tests
             Assert.IsNotNull(allServices);
             Assert.IsTrue(allServices.Count() > 0);
         }
+
+        [TestMethod()]
+        public void GetAllWorksheetTest()
+        {
+            var allWorksheets = BusinessLayer.Instance.GetAllWorksheet();
+            Assert.IsNotNull(allWorksheets);
+            Assert.IsTrue(allWorksheets.Count() > 0);
+        }
     }
 }
