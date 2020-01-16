@@ -9,7 +9,7 @@ using System.Windows;
 
 namespace ReTek_CarMechanical.Helpers
 {
-    class BusinessLayer : ICar, IClient, IPart, IService, IWorksheet
+    public class BusinessLayer : ICar, IClient, IPart, IService, IWorksheet
     {
         #region Private fields and Constructors
         private static BusinessLayer instance = null;

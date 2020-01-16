@@ -2,7 +2,7 @@
 
 namespace ReTek_CarMechanical.Models
 {
-    class Worksheet
+    public class Worksheet
     {
         public int WorksheetID { get; set; }
         public DateTime WorkStart { get; set; }

@@ -2,7 +2,7 @@
 
 namespace ReTek_CarMechanical.Models
 {
-    class Client
+    public class Client
     {
         public int ClientID { get; set; }
         public string FirstName { get; set; }

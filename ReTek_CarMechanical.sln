@@ -5,6 +5,8 @@ VisualStudioVersion = 16.0.29409.12
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ReTek_CarMechanical", "ReTek_CarMechanical\ReTek_CarMechanical.csproj", "{09997A69-D4A8-4D6D-8694-C80F905A48AB}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ReTek_CarMechanicalTests", "ReTek_CarMechanicalTests\ReTek_CarMechanicalTests.csproj", "{54B1BB03-CC33-4631-9ADD-2B7A85F44287}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -15,6 +17,10 @@ Global
 		{09997A69-D4A8-4D6D-8694-C80F905A48AB}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{09997A69-D4A8-4D6D-8694-C80F905A48AB}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{09997A69-D4A8-4D6D-8694-C80F905A48AB}.Release|Any CPU.Build.0 = Release|Any CPU
+		{54B1BB03-CC33-4631-9ADD-2B7A85F44287}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{54B1BB03-CC33-4631-9ADD-2B7A85F44287}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{54B1BB03-CC33-4631-9ADD-2B7A85F44287}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{54B1BB03-CC33-4631-9ADD-2B7A85F44287}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

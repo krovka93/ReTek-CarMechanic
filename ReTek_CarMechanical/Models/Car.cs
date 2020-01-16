@@ -2,7 +2,7 @@
 
 namespace ReTek_CarMechanical.Models
 {
-    class Car
+    public class Car
     {
         public int CarID { get; set; }
         public string CarPlateNumber { get; set; }
