@@ -59,5 +59,17 @@ namespace ReTek_CarMechanical.Helpers.Tests
             Assert.IsNotNull(allWorksheets);
             Assert.IsTrue(allWorksheets.Count() > 0);
         }
+
+        [TestMethod()]
+        public void AddNewServiceTest()
+        {
+            var allservices = BusinessLayer.Instance.GetAllService();
+            Service service = new Service();
+            service.ServiceName = "Tesztszolgáltatás";
+            service.ServicePrice = 2000;
+            BusinessLayer.Instance.AddNewService(service);
+            var newallservices = BusinessLayer.Instance.GetAllService();
+            Assert.IsTrue(newallservices.Count() > allservices.Count());
+        }
     }
 }
