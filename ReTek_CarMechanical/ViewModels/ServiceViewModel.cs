@@ -40,24 +40,42 @@ namespace ReTek_CarMechanical.ViewModels
         {
             get
             {
-                return _addNewServiceCommandHandler ?? 
-                    (_addNewServiceCommandHandler = new CommandHandler(() => AddNewServiceCommandAction(), 
+                return _addNewServiceCommandHandler ??
+                    (_addNewServiceCommandHandler = new CommandHandler(() => AddNewServiceCommandAction(),
                     () => (!string.IsNullOrEmpty(ServiceName) && ServicePrice > 0)));
             }
         }
 
         private void AddNewServiceCommandAction()
         {
-            var result = BusinessLayer.Instance.AddNewService(new Service()
+            var existingService = BusinessLayer.Instance.GetAllService().SingleOrDefault(lm => lm.ServiceName == ServiceName);
+            if (existingService != null)
             {
-                ServiceName = ServiceName,
-                ServicePrice = ServicePrice,
+                MessageBoxResult dialogResult = MessageBox.Show("Szeretné frissíteni a szolgáltatás adatokat?", "Meglévő szolgáltatás adatainak frissítése", MessageBoxButton.YesNo, MessageBoxImage.Warning);
+                if (dialogResult == MessageBoxResult.Yes)
+                {
+                    var result = BusinessLayer.Instance.UpdateService(new Service()
+                    {
+                        ServiceID = existingService.ServiceID,
+                        ServiceName = ServiceName,
+                        ServicePrice = ServicePrice,
 
-            });
+                    });
+                    MessageBox.Show(result ? "Sikeres frissítés" : "SIKERTELEN frissítés", "Szolgáltatás frissítése", MessageBoxButton.OK, MessageBoxImage.Information);
+                }
+            }
+            else
+            {
+                var result = BusinessLayer.Instance.AddNewService(new Service()
+                {
+                    ServiceName = ServiceName,
+                    ServicePrice = ServicePrice,
 
-            MessageBox.Show(result ? "Sikeres hozzáadás" : "SIKERTELEN hozzáadás", "Szolgáltatás hozzáadása", MessageBoxButton.OK, MessageBoxImage.Information);
+                });
+                MessageBox.Show(result ? "Sikeres hozzáadás" : "SIKERTELEN hozzáadás", "Szolgáltatás hozzáadása", MessageBoxButton.OK, MessageBoxImage.Information);
+            }
         }
-      protected void OnPropertyChanged(string name)
+        protected void OnPropertyChanged(string name)
         {
             PropertyChangedEventHandler handler = PropertyChanged;
             if (handler != null)

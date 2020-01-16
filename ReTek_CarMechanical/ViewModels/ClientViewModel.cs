@@ -89,7 +89,7 @@ namespace ReTek_CarMechanical.ViewModels
                         SocialSecNum = SocialSecNum,
                         TaxNum = TaxNum
                     });
-                    MessageBox.Show(result ? "Sikeres frissítés" : "SIKERTELEN frissítés", "Szolgáltatás hozzáadása", MessageBoxButton.OK, MessageBoxImage.Information);
+                    MessageBox.Show(result ? "Sikeres frissítés" : "SIKERTELEN frissítés", "Ügyféladatok frissítése", MessageBoxButton.OK, MessageBoxImage.Information);
                 }
             }
             else
@@ -103,7 +103,7 @@ namespace ReTek_CarMechanical.ViewModels
                     SocialSecNum = SocialSecNum,
                     TaxNum = TaxNum
                 });
-                MessageBox.Show(result ? "Sikeres hozzáadás" : "SIKERTELEN hozzáadás", "Szolgáltatás hozzáadása", MessageBoxButton.OK, MessageBoxImage.Information);
+                MessageBox.Show(result ? "Sikeres hozzáadás" : "SIKERTELEN hozzáadás", "Ügyféladatok hozzáadása", MessageBoxButton.OK, MessageBoxImage.Information);
             }
         }
 
