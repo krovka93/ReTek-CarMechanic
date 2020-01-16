@@ -93,7 +93,9 @@ namespace ReTek_CarMechanical.ViewModels
         {
             get
             {
-                return _addNewWorksheetCommandHandler ?? (_addNewWorksheetCommandHandler = new CommandHandler(() => AddNewWorksheetCommandAction(), () => true));
+                return _addNewWorksheetCommandHandler ?? 
+                    (_addNewWorksheetCommandHandler = new CommandHandler(() => AddNewWorksheetCommandAction(), 
+                    () => (SelectedClient != null && SelectedCar != null && SelectedPart != null && SelectedService != null && KilometerState > 0)));
             }
         }
 

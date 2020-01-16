@@ -40,7 +40,9 @@ namespace ReTek_CarMechanical.ViewModels
         {
             get
             {
-                return _addNewServiceCommandHandler ?? (_addNewServiceCommandHandler = new CommandHandler(() => AddNewServiceCommandAction(), () => true));
+                return _addNewServiceCommandHandler ?? 
+                    (_addNewServiceCommandHandler = new CommandHandler(() => AddNewServiceCommandAction(), 
+                    () => (!string.IsNullOrEmpty(ServiceName) && ServicePrice > 0)));
             }
         }
 
