@@ -16,11 +16,9 @@ namespace ReTek_CarMechanical.ViewModels
     class WorksheetViewModel : INotifyPropertyChanged
     {
         #region properties
-        public List<Client> Clients { get { return BusinessLayer.Instance.GetAllClient(); OnPropertyChanged("SelectedClient"); } }
-        //public List<Car> Cars { get { return SelectedClient != null ? BusinessLayer.Instance.GetAllCarByUser(SelectedClient) : null; } }
+        public List<Client> Clients { get { return BusinessLayer.Instance.GetAllClient(); } }
 
         private List<Car> _cars;
-
         public List<Car> Cars
         {
             get { return _cars; }
