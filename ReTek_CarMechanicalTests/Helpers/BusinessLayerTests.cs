@@ -43,5 +43,13 @@ namespace ReTek_CarMechanical.Helpers.Tests
             Assert.IsNotNull(cars);
             Assert.IsTrue(cars.Count() > 0);
         }
+
+        [TestMethod()]
+        public void GetAllServiceTest()
+        {
+            var allServices = BusinessLayer.Instance.GetAllService();
+            Assert.IsNotNull(allServices);
+            Assert.IsTrue(allServices.Count() > 0);
+        }
     }
 }
