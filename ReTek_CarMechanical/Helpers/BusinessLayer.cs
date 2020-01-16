@@ -72,7 +72,32 @@ namespace ReTek_CarMechanical.Helpers
 
         public bool UpdateExistingCar(Car existingCar)
         {
-            throw new NotImplementedException();
+            int rowsUpdated = 0;
+            try
+            {
+                oracleConnection.Open();
+                OracleCommand cmd = new OracleCommand();
+                cmd.CommandText = "UPDATE CARS SET CAR_ID=:CarID, CAR_PLATE_NUM=:CarPlateNumber, CAR_TYPE=:CarType, CAR_DATE_OF_PROD=:CarDateofProduce, CAR_VIN=:CarVIN, CAR_OWNER=:CarOwner" +
+                    " WHERE CAR_ID=:CarID";
+                cmd.Parameters.Add(new OracleParameter(":CarID", existingCar.CarID));
+                cmd.Parameters.Add(new OracleParameter(":CarPlateNumber", existingCar.CarPlateNumber));
+                cmd.Parameters.Add(new OracleParameter(":CarType", existingCar.CarType));
+                cmd.Parameters.Add(new OracleParameter(":CarDateofProduce", existingCar.CarDateofProduce));
+                cmd.Parameters.Add(new OracleParameter(":CarVIN", existingCar.CarVIN));
+                cmd.Parameters.Add(new OracleParameter(":CarOwner", existingCar.CarOwner));
+                cmd.Connection = oracleConnection;
+                rowsUpdated = cmd.ExecuteNonQuery();
+            }
+            catch (Exception e)
+            {
+                throw e;
+            }
+            finally
+            {
+                oracleConnection.Close();
+            }
+
+            return rowsUpdated > 0 ? true : false;
         }
 
         public List<Car> GetAllCar()
