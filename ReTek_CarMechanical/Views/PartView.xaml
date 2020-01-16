@@ -4,10 +4,11 @@
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       xmlns:local="clr-namespace:ReTek_CarMechanical.Views"
-      mc:Ignorable="d" 
+        xmlns:local1="clr-namespace:ReTek_CarMechanical.Helpers"
+        mc:Ignorable="d" 
       d:DesignHeight="450" d:DesignWidth="800"
       Title="Alkatrész hozzáadása" Height="240" Width="300" WindowStartupLocation="CenterOwner" ResizeMode="NoResize">
-   <Grid>
+    <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="0*"/>
             <ColumnDefinition/>
@@ -16,10 +17,60 @@
             <Label Content="Alkatrész neve"></Label>
             <TextBox Text="{Binding PartName,UpdateSourceTrigger=PropertyChanged}" Margin="5"></TextBox>
             <Label Content="Alkatrész ára"></Label>
-         <TextBox Text="{Binding PartPrice,UpdateSourceTrigger=PropertyChanged}" Margin="5"></TextBox>
+            <TextBox Margin="5">
+                <TextBox.Style>
+                    <Style TargetType="{x:Type TextBox}">
+                        <Setter Property="Validation.ErrorTemplate">
+                            <Setter.Value>
+                                <ControlTemplate>
+                                    <DockPanel LastChildFill="True">
+                                        <TextBlock  DockPanel.Dock="Bottom" Foreground="Red" FontSize="7pt" Text="{Binding ElementName=MyAdorner,Path=AdornedElement.(Validation.Errors)[0].ErrorContent}">
+                                        </TextBlock>
+                                        <Border  BorderBrush="Red" BorderThickness="2">
+                                            <AdornedElementPlaceholder Name="MyAdorner" />
+                                        </Border>
+                                    </DockPanel>
+                                </ControlTemplate>
+                            </Setter.Value>
+                        </Setter>
+                    </Style>
+                </TextBox.Style>
+                <TextBox.Text>
+                    <Binding Path="PartPrice" UpdateSourceTrigger="PropertyChanged">
+                        <Binding.ValidationRules>
+                            <local1:StringValidationRule  ErrorMessage="Kérem, adja meg numerikusan." />
+                        </Binding.ValidationRules>
+                    </Binding>
+                </TextBox.Text>
+            </TextBox>
             <Label Content="Készlet"></Label>
-            <TextBox Text="{Binding Quantity,UpdateSourceTrigger=PropertyChanged}"  Margin="5"></TextBox>
-         <Button Content="Alkatrészek regisztrálása" Command="{Binding AddNewPartCommandHandler}"  Margin="5" Height="30"></Button>
+            <TextBox Margin="5">
+                <TextBox.Style>
+                    <Style TargetType="{x:Type TextBox}">
+                        <Setter Property="Validation.ErrorTemplate">
+                            <Setter.Value>
+                                <ControlTemplate>
+                                    <DockPanel LastChildFill="True">
+                                        <TextBlock  DockPanel.Dock="Bottom" Foreground="Red" FontSize="7pt" Text="{Binding ElementName=MyAdorner,Path=AdornedElement.(Validation.Errors)[0].ErrorContent}">
+                                        </TextBlock>
+                                        <Border  BorderBrush="Red" BorderThickness="2">
+                                            <AdornedElementPlaceholder Name="MyAdorner" />
+                                        </Border>
+                                    </DockPanel>
+                                </ControlTemplate>
+                            </Setter.Value>
+                        </Setter>
+                    </Style>
+                </TextBox.Style>
+                <TextBox.Text>
+                    <Binding Path="Quantity" UpdateSourceTrigger="PropertyChanged">
+                        <Binding.ValidationRules>
+                            <local1:StringValidationRule  ErrorMessage="Kérem, adja meg numerikusan." />
+                        </Binding.ValidationRules>
+                    </Binding>
+                </TextBox.Text>
+            </TextBox>
+            <Button Content="Alkatrészek regisztrálása" Command="{Binding AddNewPartCommandHandler}"  Margin="5" Height="30"></Button>
         </StackPanel>
     </Grid>
 </Window>

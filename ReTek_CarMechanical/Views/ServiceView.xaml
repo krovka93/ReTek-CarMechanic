@@ -4,16 +4,42 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:ReTek_CarMechanical.Views"
+        xmlns:local1="clr-namespace:ReTek_CarMechanical.Helpers"
         mc:Ignorable="d"
         Title="Szolgáltatás hozzáadása" Height="210" Width="300" WindowStartupLocation="CenterOwner" ResizeMode="NoResize">
-   <Grid>
-      <StackPanel>
-         <Label Content="Szolgáltatás neve" ></Label>
+    <Grid>
+        <StackPanel>
+            <Label Content="Szolgáltatás neve" ></Label>
             <TextBox Text="{Binding ServiceName, UpdateSourceTrigger=PropertyChanged}" Margin="10"></TextBox>
-         <Label Content="Szolgáltatás ára (forintban értendő)"></Label>
-         <TextBox Text="{Binding ServicePrice, UpdateSourceTrigger=PropertyChanged}" Margin="10"></TextBox>
-         <Button Content="Szolgáltatás hozzáadása" Command="{Binding AddNewServiceCommandHandler}" Margin="5" Height="30"></Button>
-      </StackPanel>
-   </Grid>
+            <Label Content="Szolgáltatás ára (forintban értendő)"></Label>
+            <TextBox Margin="10">
+                <TextBox.Style>
+                    <Style TargetType="{x:Type TextBox}">
+                        <Setter Property="Validation.ErrorTemplate">
+                            <Setter.Value>
+                                <ControlTemplate>
+                                    <DockPanel LastChildFill="True">
+                                        <TextBlock  DockPanel.Dock="Bottom" Foreground="Red" FontSize="7pt" Text="{Binding ElementName=MyAdorner,Path=AdornedElement.(Validation.Errors)[0].ErrorContent}">
+                                        </TextBlock>
+                                        <Border  BorderBrush="Red" BorderThickness="2">
+                                            <AdornedElementPlaceholder Name="MyAdorner" />
+                                        </Border>
+                                    </DockPanel>
+                                </ControlTemplate>
+                            </Setter.Value>
+                        </Setter>
+                    </Style>
+                </TextBox.Style>
+                <TextBox.Text>
+                    <Binding Path="ServicePrice" UpdateSourceTrigger="PropertyChanged">
+                        <Binding.ValidationRules>
+                            <local1:StringValidationRule  ErrorMessage="Kérem, adja meg numerikusan." />
+                        </Binding.ValidationRules>
+                    </Binding>
+                </TextBox.Text>
+            </TextBox>
+            <Button Content="Szolgáltatás hozzáadása" Command="{Binding AddNewServiceCommandHandler}" Margin="5" Height="30"></Button>
+        </StackPanel>
+    </Grid>
 
 </Window>
