@@ -15,7 +15,7 @@
         <StackPanel Grid.ColumnSpan="2">
             <Label Content="Alkatrész neve"></Label>
             <TextBox Text="{Binding PartName,UpdateSourceTrigger=PropertyChanged}" Margin="5"></TextBox>
-            <Label Content="Alketrész ára"></Label>
+            <Label Content="Alkatrész ára"></Label>
          <TextBox Text="{Binding PartPrice,UpdateSourceTrigger=PropertyChanged}" Margin="5"></TextBox>
             <Label Content="Készlet"></Label>
             <TextBox Text="{Binding Quantity,UpdateSourceTrigger=PropertyChanged}"  Margin="5"></TextBox>
