@@ -77,5 +77,29 @@ namespace ReTek_CarMechanical.Helpers.Tests
             Assert.IsTrue(allWorksheets.Count() > 0);
 >>>>>>> 9936cb59ea15b4b87fa281e32f58f53b09ce2178
         }
+
+        [TestMethod()]
+        public void AddNewServiceTest()
+        {
+            var allservices = BusinessLayer.Instance.GetAllService();
+            Service service = new Service();
+            service.ServiceName = "Tesztszolgáltatás";
+            service.ServicePrice = 2000;
+            BusinessLayer.Instance.AddNewService(service);
+            var newallservices = BusinessLayer.Instance.GetAllService();
+            Assert.IsTrue(newallservices.Count() > allservices.Count());
+        }
+
+        [TestMethod()]
+        public void UpdateCarTest()
+        {
+            var updateCar = BusinessLayer.Instance.UpdateExistingCar(new Car()
+            {
+                CarPlateNumber = "GZA443",
+                CarType = "Ford Ka",
+                CarVIN = "FDJK4686786D"
+            });
+            Assert.IsTrue(updateCar);
+        }
     }
 }

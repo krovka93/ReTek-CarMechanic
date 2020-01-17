@@ -2,6 +2,7 @@
 using ReTek_CarMechanical.Models;
 using System;
 using System.ComponentModel;
+using System.Linq;
 using System.Windows;
 using System.Windows.Input;
 
@@ -60,30 +61,53 @@ namespace ReTek_CarMechanical.ViewModels
         {
             get
             {
-                return _addNewClientCommandHandler ?? 
-                    (_addNewClientCommandHandler = new CommandHandler(() => ClientCommandHandlerAction(), 
-                    () => (!string.IsNullOrEmpty(FirstName) && 
-                    !string.IsNullOrEmpty(LastName) && 
-                    !string.IsNullOrEmpty(BirthPlace) && 
-                    !string.IsNullOrEmpty(SocialSecNum) && 
+                return _addNewClientCommandHandler ??
+                    (_addNewClientCommandHandler = new CommandHandler(() => ClientCommandHandlerAction(),
+                    () => (!string.IsNullOrEmpty(FirstName) &&
+                    !string.IsNullOrEmpty(LastName) &&
+                    !string.IsNullOrEmpty(BirthPlace) &&
+                    !string.IsNullOrEmpty(SocialSecNum) &&
                     !string.IsNullOrEmpty(TaxNum))));
             }
         }
 
         public void ClientCommandHandlerAction()
         {
-           var result = BusinessLayer.Instance.AddClient(new Client() { 
-                BirthDate = BirthDate, 
-                BirthPlace=BirthPlace, 
-                FirstName= FirstName,
-                LastName= LastName, 
-                SocialSecNum = SocialSecNum,
-                TaxNum = TaxNum });
-
-           MessageBox.Show(result ? "Sikeres hozzáadás" : "SIKERTELEN hozzáadás", "Szolgáltatás hozzáadása", MessageBoxButton.OK, MessageBoxImage.Information);
+            var existingUser = BusinessLayer.Instance.GetAllClient().SingleOrDefault(lm => lm.TaxNum == TaxNum && lm.SocialSecNum == SocialSecNum);
+            if (existingUser != null)
+            {
+                MessageBoxResult dialogResult = MessageBox.Show("Szeretné frissíteni a személyes adatokat?", "Meglévő személy adatainak frissítése", MessageBoxButton.YesNo, MessageBoxImage.Warning);
+                if (dialogResult == MessageBoxResult.Yes)
+                {
+                    var result = BusinessLayer.Instance.UpdateClient(new Client()
+                    {
+                        ClientID = existingUser.ClientID,
+                        BirthDate = BirthDate,
+                        BirthPlace = BirthPlace,
+                        FirstName = FirstName,
+                        LastName = LastName,
+                        SocialSecNum = SocialSecNum,
+                        TaxNum = TaxNum
+                    });
+                    MessageBox.Show(result ? "Sikeres frissítés" : "SIKERTELEN frissítés", "Ügyféladatok frissítése", MessageBoxButton.OK, MessageBoxImage.Information);
+                }
+            }
+            else
+            {
+                var result = BusinessLayer.Instance.AddClient(new Client()
+                {
+                    BirthDate = BirthDate,
+                    BirthPlace = BirthPlace,
+                    FirstName = FirstName,
+                    LastName = LastName,
+                    SocialSecNum = SocialSecNum,
+                    TaxNum = TaxNum
+                });
+                MessageBox.Show(result ? "Sikeres hozzáadás" : "SIKERTELEN hozzáadás", "Ügyféladatok hozzáadása", MessageBoxButton.OK, MessageBoxImage.Information);
+            }
         }
 
-      protected void OnPropertyChanged(string name)
+        protected void OnPropertyChanged(string name)
         {
             PropertyChangedEventHandler handler = PropertyChanged;
             if (handler != null)

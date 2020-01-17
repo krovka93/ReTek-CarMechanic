@@ -3,6 +3,7 @@ using ReTek_CarMechanical.Models;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.Linq;
 using System.Windows;
 using System.Windows.Input;
 
@@ -58,27 +59,47 @@ namespace ReTek_CarMechanical.ViewModels
         {
             get
             {
-                return _addNewCarCommandHandler ?? 
-                    (_addNewCarCommandHandler = new CommandHandler(() => AddNewCarCommandAction(), 
-                    () => (!string.IsNullOrEmpty(CarVIN) && !string.IsNullOrEmpty(CarType) &&  !string.IsNullOrEmpty(CarPlateNumber) && SelectedClient != null)));
+                return _addNewCarCommandHandler ??
+                    (_addNewCarCommandHandler = new CommandHandler(() => AddNewCarCommandAction(),
+                    () => (!string.IsNullOrEmpty(CarVIN) && !string.IsNullOrEmpty(CarType) && !string.IsNullOrEmpty(CarPlateNumber) && SelectedClient != null)));
             }
         }
 
         private void AddNewCarCommandAction()
         {
-           var result = BusinessLayer.Instance.UploadNewCar(new Car()
+            var existingCar = BusinessLayer.Instance.GetAllCar().SingleOrDefault(lm => lm.CarPlateNumber == CarPlateNumber);
+            if (existingCar != null)
             {
-                CarOwner = SelectedClient.ClientID,
-                CarDateofProduce = CarDateofProduce,
-                CarPlateNumber = CarPlateNumber,
-                CarType = CarType,
-                CarVIN = CarVIN
-            });
-
-           MessageBox.Show(result ? "Sikeres hozzáadás" : "SIKERTELEN hozzáadás", "Szolgáltatás hozzáadása", MessageBoxButton.OK, MessageBoxImage.Information);
+                MessageBoxResult dialogResult = MessageBox.Show("Szeretné frissíteni a gépjármű adatokat?", "Meglévő gépjármű adatainak frissítése", MessageBoxButton.YesNo, MessageBoxImage.Warning);
+                if (dialogResult == MessageBoxResult.Yes)
+                {
+                    var result = BusinessLayer.Instance.UpdateExistingCar(new Car()
+                    {
+                        CarID = existingCar.CarID,
+                        CarOwner = SelectedClient.ClientID,
+                        CarDateofProduce = CarDateofProduce,
+                        CarPlateNumber = CarPlateNumber,
+                        CarType = CarType,
+                        CarVIN = CarVIN
+                    });
+                    MessageBox.Show(result ? "Sikeres frissítés" : "SIKERTELEN frissítés", "Gépjárműadatok frissítése", MessageBoxButton.OK, MessageBoxImage.Information);
+                }
+            }
+            else
+            {
+                var result = BusinessLayer.Instance.UploadNewCar(new Car()
+                {
+                    CarOwner = SelectedClient.ClientID,
+                    CarDateofProduce = CarDateofProduce,
+                    CarPlateNumber = CarPlateNumber,
+                    CarType = CarType,
+                    CarVIN = CarVIN
+                });
+                MessageBox.Show(result ? "Sikeres hozzáadás" : "SIKERTELEN hozzáadás", "Gépjárműadatok hozzáadása", MessageBoxButton.OK, MessageBoxImage.Information);
+            }
         }
 
-      protected void OnPropertyChanged(string name)
+        protected void OnPropertyChanged(string name)
         {
             PropertyChangedEventHandler handler = PropertyChanged;
             if (handler != null)

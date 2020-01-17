@@ -13,7 +13,7 @@ namespace ReTek_CarMechanical.ViewModels
 {
     class PartViewModel : INotifyPropertyChanged
     {
-       
+
         private string _partName;
 
         public string PartName
@@ -22,7 +22,7 @@ namespace ReTek_CarMechanical.ViewModels
             set { _partName = value; OnPropertyChanged("PartName"); }
         }
 
-        
+
         private int _partPrice;
 
         public int PartPrice
@@ -31,7 +31,7 @@ namespace ReTek_CarMechanical.ViewModels
             set { _partPrice = value; OnPropertyChanged("PartPrice"); }
         }
 
-       
+
         private int _quantity;
 
         public int Quantity
@@ -49,26 +49,43 @@ namespace ReTek_CarMechanical.ViewModels
         {
             get
             {
-                return _addNewPartCommandHandler ?? 
-                    (_addNewPartCommandHandler = new CommandHandler(() => AddNewPartCommandAction(), 
+                return _addNewPartCommandHandler ??
+                    (_addNewPartCommandHandler = new CommandHandler(() => AddNewPartCommandAction(),
                     () => (!string.IsNullOrEmpty(PartName) && PartPrice > 0)));
             }
         }
 
         private void AddNewPartCommandAction()
         {
-            var result = BusinessLayer.Instance.AddPart(new Part()
+            var existingPart = BusinessLayer.Instance.GetAllPart().SingleOrDefault(lm => lm.PartName == PartName);
+            if (existingPart != null)
             {
-                PartName = PartName,
-                Price = PartPrice,
-                Quantity = Quantity
-                
+                MessageBoxResult dialogResult = MessageBox.Show("Szeretné frissíteni az alkatrész adatokat?", "Meglévő alkatrész adatainak frissítése", MessageBoxButton.YesNo, MessageBoxImage.Warning);
+                if (dialogResult == MessageBoxResult.Yes)
+                {
+                    var result = BusinessLayer.Instance.UpdatePart(new Part()
+                    {
+                        PartID = existingPart.PartID,
+                        PartName = PartName,
+                        Price = PartPrice,
+                        Quantity = Quantity
+                    });
+                    MessageBox.Show(result ? "Sikeres frissítés" : "SIKERTELEN frissítés", "Alkatrészadatok frissítése", MessageBoxButton.OK, MessageBoxImage.Information);
+                }
+            }
+            else
+            {
+                var result = BusinessLayer.Instance.AddPart(new Part()
+                {
+                    PartName = PartName,
+                    Price = PartPrice,
+                    Quantity = Quantity
+                });
+                MessageBox.Show(result ? "Sikeres hozzáadás" : "SIKERTELEN hozzáadás", "Alkatrészadatok hozzáadása", MessageBoxButton.OK, MessageBoxImage.Information);
+            }
 
-            });
-
-            MessageBox.Show(result ? "Sikeres hozzáadás" : "SIKERTELEN hozzáadás", "Szolgáltatás hozzáadása", MessageBoxButton.OK, MessageBoxImage.Information);
         }
-      protected void OnPropertyChanged(string name)
+        protected void OnPropertyChanged(string name)
         {
             PropertyChangedEventHandler handler = PropertyChanged;
             if (handler != null)
