@@ -71,5 +71,17 @@ namespace ReTek_CarMechanical.Helpers.Tests
             var newallservices = BusinessLayer.Instance.GetAllService();
             Assert.IsTrue(newallservices.Count() > allservices.Count());
         }
+
+        [TestMethod()]
+        public void UpdateCarTest()
+        {
+            var updateCar = BusinessLayer.Instance.UpdateExistingCar(new Car()
+            {
+                CarPlateNumber = "GZA443",
+                CarType = "Ford Ka",
+                CarVIN = "FDJK4686786D"
+            });
+            Assert.IsTrue(updateCar);
+        }
     }
 }
