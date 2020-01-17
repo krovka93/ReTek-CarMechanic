@@ -44,8 +44,6 @@ namespace ReTek_CarMechanical.Helpers.Tests
             Assert.IsTrue(cars.Count() > 0);
         }
 
-<<<<<<< HEAD
-
         [TestMethod()]
         public void GetAllServiceTest()
         {
@@ -60,9 +58,10 @@ namespace ReTek_CarMechanical.Helpers.Tests
             var addPart = BusinessLayer.Instance.GetAllClient();
             Assert.IsNotNull(addPart);
             Assert.IsTrue(addPart.Count() > 0);
-=======
+        }
+
         [TestMethod()]
-        public void GetAllServiceTest()
+        public void GetAllServiceTest2()
         {
             var allServices = BusinessLayer.Instance.GetAllService();
             Assert.IsNotNull(allServices);
@@ -75,7 +74,6 @@ namespace ReTek_CarMechanical.Helpers.Tests
             var allWorksheets = BusinessLayer.Instance.GetAllWorksheet();
             Assert.IsNotNull(allWorksheets);
             Assert.IsTrue(allWorksheets.Count() > 0);
->>>>>>> 9936cb59ea15b4b87fa281e32f58f53b09ce2178
         }
 
         [TestMethod()]
@@ -88,18 +86,6 @@ namespace ReTek_CarMechanical.Helpers.Tests
             BusinessLayer.Instance.AddNewService(service);
             var newallservices = BusinessLayer.Instance.GetAllService();
             Assert.IsTrue(newallservices.Count() > allservices.Count());
-        }
-
-        [TestMethod()]
-        public void UpdateCarTest()
-        {
-            var updateCar = BusinessLayer.Instance.UpdateExistingCar(new Car()
-            {
-                CarPlateNumber = "GZA443",
-                CarType = "Ford Ka",
-                CarVIN = "FDJK4686786D"
-            });
-            Assert.IsTrue(updateCar);
         }
     }
 }
