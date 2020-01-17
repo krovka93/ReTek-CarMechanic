@@ -44,6 +44,7 @@ namespace ReTek_CarMechanical.Helpers.Tests
             Assert.IsTrue(cars.Count() > 0);
         }
 
+<<<<<<< HEAD
 
         [TestMethod()]
         public void GetAllServiceTest()
@@ -59,6 +60,22 @@ namespace ReTek_CarMechanical.Helpers.Tests
             var addPart = BusinessLayer.Instance.GetAllClient();
             Assert.IsNotNull(addPart);
             Assert.IsTrue(addPart.Count() > 0);
+=======
+        [TestMethod()]
+        public void GetAllServiceTest()
+        {
+            var allServices = BusinessLayer.Instance.GetAllService();
+            Assert.IsNotNull(allServices);
+            Assert.IsTrue(allServices.Count() > 0);
+        }
+
+        [TestMethod()]
+        public void GetAllWorksheetTest()
+        {
+            var allWorksheets = BusinessLayer.Instance.GetAllWorksheet();
+            Assert.IsNotNull(allWorksheets);
+            Assert.IsTrue(allWorksheets.Count() > 0);
+>>>>>>> 9936cb59ea15b4b87fa281e32f58f53b09ce2178
         }
     }
 }
